@@ -1,0 +1,72 @@
+---
+title: "Análisis de Juegos de Steam: ¿Cuáles son los mejores juegos?"
+author: "Gabriel Guevara, Christopher Escalante y Noryen Harringthon"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+```
+
+## Introduccion
+
+Steam es la plataforma de distribución digital de videojuegos más grande del mundo, con miles de títulos disponibles y millones de usuarios activos diariamente. Cada juego en Steam genera datos valiosos que van desde las valoraciones de los jugadores hasta el tiempo que dedican a jugarlo. Estos datos representan una oportunidad única para entender qué hace que un juego sea exitoso o apreciado por su comunidad.
+
+Sin embargo para el concepto de "mejor juego" es bastante subjetivo y puede variar según la perspectiva de cada persona. Para algunos, el mejor juego es aquel con las críticas más positivas, mientras que para otros, es el que más horas de entretenimiento proporciona, y para otros, puede ser el que ha logrado llegar a más personas.
+
+## 1. Definición del Problema
+
+El problema a investigar es: **¿Qué juegos de Steam pueden considerarse los "mejores" según diferentes métricas de éxito, como las valoraciones de los usuarios, el tiempo de juego y la base de jugadores?**
+
+Con este análisis busca ir más allá de las simples listas de popularidad para proporcionar una visión multifacética del éxito en la plataforma Steam.
+
+## 2. Objetivos de la Investigación
+
+### Objetivo General
+
+Identificar los juegos mejor posicionados en Steam desde diferentes perspectivas, utilizando los datos disponibles para definir múltiples dimensiones de "éxito" y "calidad".
+
+### Objetivos Específicos
+
+-   **Por Valoración:** Determinar los juegos con mejor relación entre reseñas positivas y negativas (ratio de positividad), considerando también el volumen total de reseñas para evitar sesgos por pocas votaciones.
+-   **Por Tiempo de Juego:** Identificar los juegos con mayor tiempo de juego promedio y mediano, lo que podría indicar su capacidad de retener a los jugadores (factor de "adicción" o "rejugabilidad").
+-   **Por Popularidad:** Señalar los juegos con mayor base de jugadores estimada (columna `owners`), para entender cuáles han logrado el mayor alcance en el mercado.
+-   **Por Desarrollador/Publicador:** Analizar si ciertos desarrolladores (como Valve) tienden a producir juegos que destacan en las métricas anteriores.
+-   **Por Género:** Explorar qué géneros de juegos (Acción, RPG, Estrategia, etc.) tienden a obtener mejores valoraciones o mayores tiempos de juego.
+
+## 3. Preguntas de Investigación
+
+Para guiar el análisis, nos haremos las siguientes preguntas:
+
+1.  **Valoraciones:** ¿Cuáles son los 10 juegos con mejor ratio de reseñas positivas? ¿Cambia esta lista si filtramos por juegos con más de 1000 reseñas totales?
+2.  **Tiempo de Juego:** ¿Qué juegos tienen el promedio de tiempo de juego más alto? ¿Coinciden con los juegos mejor valorados o son diferentes?
+3.  **Propietarios:** ¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Son en su mayoría gratuitos (Free to Play) o de pago?
+4.  **Relación Precio-Valoración:** ¿Existe una correlación entre el precio de un juego y su valoración? ¿Los juegos más caros tienden a ser mejor valorados?
+5.  **Géneros Destacados:** ¿Qué géneros tienen en promedio, las mejores valoraciones? ¿Qué géneros tienen los mayores tiempos de juego?
+
+## 4. Justificación
+
+Este análisis es relevante por tres razones principales:
+
+**Para los jugadores:** Con más de 50,000 juegos en Steam, elegir qué jugar puede ser abrumador. Este estudio ayudará a los usuarios a descubrir juegos destacados más allá de los simples rankings de popularidad, considerando múltiples dimensiones como valoración, tiempo de juego y relación calidad-precio.
+
+**Para desarrolladores:** Entender qué factores (género, precio, modelo de negocio) se asocian con mejores valoraciones y mayor retención de jugadores puede orientar decisiones estratégicas en el desarrollo y publicación de nuevos títulos.
+
+**Para el equipo:** Este proyecto nos permite aplicar metodologías profesionales de trabajo colaborativo (Git, ramas, pull requests) y desarrollar habilidades de análisis de datos con R, preparándonos para desafíos reales en el ámbito laboral.
+
+En conjunto, el estudio no solo responde a la pregunta "¿cuáles son los mejores juegos?", sino que también ofrece una metodología replicable para evaluar productos digitales desde múltiples perspectivas.
+
+## 5. Conclusiones Esperadas
+
+Se espera que este análisis revele que:
+
+-   Los juegos "mejores" varían según la métrica utilizada: los más valorados no siempre son los más jugados.
+-   Los juegos gratuitos (Free to Play) tienden a tener una base de jugadores enorme pero no necesariamente las mejores valoraciones.
+-   Existen ciertos géneros y desarrolladores que consistentemente producen juegos bien valorados.
+-   La relación entre precio y valoración no es necesariamente directa (juegos más caros no siempre son mejor valorados).
