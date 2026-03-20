@@ -1,0 +1,305 @@
+---
+title: 'Análisis de Juegos de Steam: ¿Cuáles son los mejores juegos?'
+author:
+- Christopher Escalante
+- Gabriel Guevara
+- Noryen Harringhton
+date: "Abril 2026"
+output:
+  pdf_document:
+    template: template.tex
+    keep_tex: true
+    toc: true
+    number_sections: true
+    citation_package: natbib
+  html_document:
+    toc: true
+    df_print: paged
+director:
+- Jesus Ochoa
+- Oliver Triveño
+lugar: "Caracas"
+facultad: 
+  - Facultad de Ciencias Económicas y Sociales
+  - Escuela de Estadistica y Ciencias Actuariales
+escudo: Latex/Classes/Escudos/faces
+bibliography: bibliografia.bib
+degree: Computación I
+abstract: |
+  Resumen del trabajo de investigación...
+---
+
+```{r setup, include=FALSE}
+# Configuración global de chunks
+knitr::opts_chunk$set(
+  echo = FALSE,        # Mostrar código
+  warning = FALSE,    # Ocultar advertencias
+  message = FALSE,    # Ocultar mensajes de carga
+  fig.align = "center",
+  out.width = "90%",
+  fig.pos = "H",
+  out.extra = ""
+)
+
+# Cargar librerías necesarias
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(scales)
+```
+
+\chapter*{Introducción}
+
+Steam es la plataforma de distribución digital de videojuegos más grande del mundo, con miles de títulos disponibles y millones de usuarios activos diariamente. Cada juego en Steam genera datos valiosos que van desde las valoraciones de los jugadores hasta el tiempo que dedican a jugarlo. Estos datos representan una oportunidad única para entender qué hace que un juego sea exitoso o apreciado por su comunidad.\
+
+
+Sin embargo para el concepto de "mejor juego" es bastante subjetivo y puede variar según la perspectiva de cada persona. Para algunos, el mejor juego es aquel con las críticas más positivas, mientras que para otros, es el que más horas de entretenimiento proporciona, y para otros, puede ser el que ha logrado llegar a más personas.
+
+\chapter{Planteamiento del Problema}
+
+El problema a investigar es: **¿Qué juegos de Steam pueden considerarse los "mejores" según diferentes métricas de éxito, como las valoraciones de los usuarios, el tiempo de juego y la base de jugadores?**\
+
+Con este análisis busca ir más allá de las simples listas de popularidad para proporcionar una visión multifacética del éxito en la plataforma Steam. Debido a esto, se plantea las siguientes preguntas de investigación:\
+
+\textbf{1.} ¿Cuáles son los 10 juegos con mejor ratio de reseñas positivas? ¿Cambia esta lista si filtramos por juegos con más de 1000 reseñas totales?\
+
+\textbf{2.}  ¿Qué juegos tienen el promedio de tiempo de juego más alto? ¿Coinciden con los juegos mejor valorados o son diferentes?\
+
+\textbf{3.} ¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Son en su mayoría gratuitos (Free to Play) o de pago?\
+
+\textbf{4.} ¿Existe una correlación entre el precio de un juego y su valoración? ¿Los juegos más caros tienden a ser mejor valorados?\
+
+\textbf{5.} ¿Qué géneros tienen en promedio, las mejores valoraciones? ¿Qué géneros tienen los mayores tiempos de juego?
+
+\section{Justificación}
+
+Este análisis es relevante por tres razones principales:  
+
+- **Para los jugadores:** Con más de 50,000 juegos en Steam, elegir qué jugar puede ser abrumador. Este estudio ayudará a los usuarios a descubrir juegos destacados más allá de los simples rankings de popularidad, considerando múltiples dimensiones como valoración, tiempo de juego y relación calidad-precio.  
+
+- **Para desarrolladores:** Entender qué factores (género, precio, modelo de negocio) se asocian con mejores valoraciones y mayor retención de jugadores puede orientar decisiones estratégicas en el desarrollo y publicación de nuevos títulos.
+
+- **Para el equipo:** Este proyecto nos permite aplicar metodologías profesionales de trabajo colaborativo (Git, ramas, pull requests) y desarrollar habilidades de análisis de datos con R, preparándonos para desafíos reales en el ámbito laboral.
+
+En conjunto, el estudio no solo responde a la pregunta "¿cuáles son los mejores juegos?", sino que también ofrece una metodología replicable para evaluar productos digitales desde múltiples perspectivas.
+
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Identificar los juegos mejor posicionados en Steam desde diferentes perspectivas, utilizando los datos disponibles para definir múltiples dimensiones de "éxito" y "calidad".
+
+
+\subsection{Objetivos Específicos}
+\begin{enumerate}
+  \item{Por Valoración: Determinar los juegos con mejor relación entre reseñas positivas y negativas (ratio de positividad), considerando también el volumen total de reseñas para evitar sesgos por pocas votaciones.}
+  \item{Por Tiempo de Juego: Identificar los juegos con mayor tiempo de juego promedio y mediano, lo que podría indicar su capacidad de retener a los jugadores (factor de "adicción" o "rejugabilidad").}
+  \item{Por Popularidad: Señalar los juegos con mayor base de jugadores estimada (columna `owners`), para entender cuáles han logrado el mayor alcance en el mercado.}
+  \item{Por Desarrollador/Publicador: Comparar el rendimiento de los juegos indie frente a los juegos de grandes estudios, analizando si los indies tienden a destacar}
+  \item{Por Género: Explorar qué géneros de juegos (Acción, RPG, Estrategia, etc.) tienden a obtener mejores valoraciones o mayores tiempos de juego.}
+\end{enumerate}
+
+\section{Cobertura}
+
+\subsection{Horizontal}
+
+Describir la cobertura Horizontal del trabajo de investigación\
+
+\begin{table}[ht]
+\centering
+\caption{Variables consideradas} 
+\resizebox{10cm}{!} {
+\begin{tabular}{ccc}
+  \hline
+\ \ \ \ \ NOMBRE DE LA VARIABLE \\ 
+  \hline
+   VARIABLE 1 \\ 
+VARIABLE 2\\ 
+VARIABLE n\\ 
+   \hline
+\end{tabular}
+}
+\end{table}
+
+\subsection{Vertical}
+
+Describir la cobertura Vertical del trabajo de investigación
+
+\section{Periodo de Referencia}
+
+Describir la fuente y el Periodo de Referencia utilizado en el trabajo de investigación
+
+\section{Variables}
+
+Describir la variable en estudio en el trabajo de investigación
+
+\chapter{Marco Teórico}
+
+\section{Bases Teóricas}
+
+Resumen de las bases teoricas explicadas en el capitulo y su importancia\
+
+\subsection{Definición 1}
+
+Descripción de la definición 1\
+
+\subsection{Definición 2}
+
+Descripción de la definición 2\
+
+\subsection{Definición n}
+
+Descripción de la definición n\
+
+\chapter{Marco Metódico}
+
+En esta sección se presentan las metodologías y/o test necesarios relacionados con la práctica divulgada en el marco teórico, así como las fuentes de datos.
+
+\section{Bases metódicas utilizadas en el trabajo de investigación}
+
+Desarrollo\
+
+\subsection{Procesamiento y Limpieza de Datos}
+
+Descripción\
+
+```{r etl-steam, echo=FALSE, message=FALSE, warning=FALSE}
+
+# 1. Cargar librerías
+library(tidyverse)
+library(janitor)
+library(lubridate)
+
+# 2. Cargar datos crudos
+steam_raw <- read_csv("2. Steam.csv")
+
+# 3. Limpieza inicial
+steam_clean <- steam_raw %>%
+  clean_names() %>%
+  mutate(across(where(is.character), str_squish)) 
+
+# 4. Conversión de tipos
+
+steam_clean <- steam_clean %>%
+  mutate(
+    release_date = as_date(release_date), 
+    year = year(release_date)             
+  )
+
+# 5. Separar columnas con múltiples valores
+steam_clean <- steam_clean %>%
+  mutate(
+    platforms = str_split(platforms, ";"),
+    categories = str_split(categories, ";"),
+    steamspy_tags = str_split(steamspy_tags, ";")
+  )
+
+# 6. Crear métricas útiles
+steam_clean <- steam_clean %>%
+  mutate(
+    total_ratings = positive_ratings + negative_ratings,
+    rating = if_else(total_ratings == 0, NA_real_,
+                     positive_ratings / total_ratings)
+  )
+
+#7. Manejo de valores faltantes
+
+steam_clean <- steam_clean %>%
+  filter(!is.na(name)) %>%         # 
+  filter(!is.na(release_date))     
+
+#8. Eliminar duplicados
+steam_clean <- steam_clean %>% distinct()
+
+#9 Verificación de dimensiones post-limpieza
+dim_desc <- paste("Registros válidos:", nrow(steam_clean), 
+                  "| Variables:", ncol(steam_clean))
+print(dim_desc)
+```
+
+\subsection{Item 2}
+
+Descripción\
+
+\subsubsection{Item 2.2}
+
+Descripción\
+
+\subsection{Item n}
+
+Descripción\
+
+\chapter{Análisis de Resultados}
+
+{\small Este capítulo presenta los resultados obtenidos al aplicar las metodologías descritas en el capítulo anterior, así como del análisis estadístico descriptivo de las variables estudiadas y las ventajas y desventajas al aplicar dichos tests.}
+
+\section{Presentación de resultados 1}
+
+Descripción\
+
+```{r top-rating-no-filter, echo=FALSE, message=FALSE, warning=FALSE}
+
+steam_clean %>%
+  arrange(desc(rating)) %>%
+  slice_head(n = 10) %>%
+  ggplot(aes(x = reorder(name, rating), y = rating)) +
+  geom_col(fill = "red") +
+  coord_flip() +
+  labs(
+    title = "Top 10 juegos mejor valorados (sin filtro de reseñas)",
+    x = "Juego",
+    y = "Ratio de reseñas positivas"
+  ) +
+  theme_minimal()
+
+
+```
+
+```{r top-rating-filter-100000, echo=FALSE, message=FALSE, warning=FALSE}
+
+steam_clean %>%
+  filter(total_ratings > 100000) %>%        # filtro importante
+  arrange(desc(rating)) %>%
+  slice_head(n = 10) %>%
+  ggplot(aes(x = reorder(name, rating), y = rating)) +
+  geom_col(fill = "blue") +
+  coord_flip() +
+  labs(
+    title = "Top 10 juegos mejor valorados (mín. 100000 reseñas)",
+    x = "Juego",
+    y = "Ratio de reseñas positivas"
+  ) +
+  theme_minimal()
+```
+
+\section{Presentación de resultados 2}
+
+Descripción\
+
+\section{Presentación de resultados n}
+
+Descripción\
+
+\chapter{Conclusiones y Recomendaciones}
+
+\textbf{1.-} Conclusion 1 del trabajo de investigación.\
+
+\textbf{Recomendación} Recomendación 1 del trabajo de investigación.\
+
+\textbf{2.-} Conclusion 2 del trabajo de investigación.\
+
+\textbf{Recomendación} Recomendación 2 del trabajo de investigación.\
+
+\textbf{n.-} Conclusion n del trabajo de investigación.\
+
+\textbf{Recomendación} Recomendación n del trabajo de investigación.\
+
+\appendix
+\renewcommand{\thechapter}{\Alph{chapter}}
+
+\chapter{Anexo A}
+
+\chapter{Anexo B}
+
+\chapter{Anexo C}
