@@ -1,0 +1,103 @@
+---
+title: "Análisis de Juegos de Steam: ¿Cuáles son los mejores juegos?"
+author: "Gabriel Guevara, Christopher Escalante y Noryen Harringthon"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+library(lubridate)
+```
+
+## Introduccion
+
+¿Qué es Steam?
+Desarrollada por Valve Corporation y lanzada en 2003, Steam es indiscutiblemente la plataforma de distribución digital de videojuegos para PC más grande e influyente del mundo. Con un catálogo que supera decenas de miles de títulos y picos de más de 30 millones de usuarios concurrentes diarios. Funciona como red social, plataforma de gestión de derechos digitales (DRM), servidor de emparejamiento (matchmaking) y el principal termómetro de las tendencias de la industria.
+
+Diversidad del Ecosistema
+La industria de los videojuegos es enorme y se clasifica principalmente por géneros que marcan las mecánicas y la experiencia de los jugadores. Desde la adrenalina de los juegos de acción y Shooters, la inmersión profunda de los RPG (Juegos de Rol), la planificación táctica de la Estrategia, hasta experiencias más relajadas en la categoría Cozy.
+
+Además del género, el mercado actual se divide en dos grandes ligas que compiten por el tiempo y el dinero del usuario:
+
+Los juegos Triple A (AAA): Desarrollados por grandes estudios con presupuestos multimillonarios y campañas masivas de marketing.
+
+Los Juegos Indie (independientes): Creados por equipos pequeños o individuos que compensan la falta de presupuesto con alta innovación, nichos específicos y propuestas arriesgadas.
+
+Impacto de los Free to Play
+A esta guerra de escalas se suma el modelo Free to Play (F2P). Al eliminar la barrera de entrada del precio inicial, estos juegos han transformado la industria, pasando de vender productos a estandarizar los “juegos como servicio” como el modelo principal de la industria.
+
+El modelo F2P no solo compite por el dinero de los jugadores a través de microtransacciones, sino que acapara masivamente el tiempo de los consumidores, un recurso valioso para las empresas. Esto ha generado que los juegos tradicionales de pago deban competir contra títulos gratuitos diseñados para retener a los usuarios durante miles de horas.
+
+Cada juego en Steam deja una huella de datos como valoraciones, tiempo de uso, etiquetas, precio y ventas estimadas. Sin embargo, definir qué hace que un juego sea un “éxito” en este ecosistema tan complejo es un reto.
+
+## 1. Definición del Problema
+
+El problema a investigar es: **¿Cuáles son los determinantes del éxito comercial y de retención en el mercado de videojuegos de PC, y cómo compiten las diferentes escalas de producción (Indie vs. AAA) y modelos de monetización (Premium vs. Free to Play) en este ecosistema?**
+
+Este estudio busca proporcionar un análisis de mercado multifacético. En una industria saturada, el éxito ya no se mide únicamente por las unidades vendidas iniciales. Es necesario descifrar cómo variables como el precio, el género, el tamaño del desarrollador y la gratuidad del acceso interactúan para captar usuarios. Se busca entender cómo los juegos tradicionales pueden sobrevivir frente a los gigantes Free to Play, y qué estrategias de posicionamiento resultan verdaderamente efectivas según el perfil de cada proyecto.
+
+## 2. Objetivos de la Investigación
+
+### Objetivo General
+
+Identificar y analizar los patrones de éxito de los videojuegos en Steam desde una perspectiva de marketing estratégico y ciencia de datos, evaluando cómo diferentes atributos (precio, género, tiempo de juego y escala de producción) impactan el posicionamiento y la recepción del producto.
+
+### Objetivos Específicos
+
+-   **Análisis Competitivo (Indie vs. AAA):** Comparar el rendimiento en mercado de los juegos de grandes publicadores frente a los desarrolladores independientes, evaluando si un menor presupuesto se traduce en menor calidad percibida o si los Indies lideran la satisfacción del usuario.
+
+-   **El Impacto del Modelo Free to Play (F2P):** Evaluar cómo los juegos gratuitos alteran la dinámica competitiva de la industria, analizando su capacidad para acaparar masivamente la cuota de mercado y cómo esta concentración afecta la viabilidad de los juegos de pago (Premium).
+
+-   **Rentabilidad del Tiempo (Valor por Hora):** Analizar la relación entre el precio de venta y el tiempo mediano de juego para establecer un "costo por hora de entretenimiento" y entender la disposición a pagar del consumidor.
+
+-   **Por Valoración y Retención:** Determinar los juegos con mejor ratio de positividad y mayor tiempo de juego, identificando las mecánicas o categorías que generan mayor fidelidad.
+
+-   **Impacto de la Accesibilidad y Expansión:** Evaluar cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial.
+
+-   **Estacionalidad y Ciclo de Vida:** Explorar si la fecha de lanzamiento revela patrones estacionales favorables para maximizar la visibilidad y las ventas en la plataforma.
+
+## 3. Preguntas de Investigación
+
+Para guiar el análisis estadístico, plantearemos las siguientes preguntas:
+
+1.  **Guerra de Escalas:** ¿Logran los juegos con la etiqueta "Indie" superar en ratio de reseñas positivas a los juegos de grandes publicadores (AAA) a pesar de tener menor volumen de propietarios?
+
+2.  **Disrupción del F2P:** ¿Cómo se compara la retención real (tiempo de juego) de los gigantes Free to Play frente a los títulos Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo sobreviven los juegos como servicio?
+
+3.  **Economía del Jugador:** ¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?
+
+4.  **Adquisición vs. Retención:** ¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Se traduce un alto número de descargas en altos promedios de tiempo de juego?
+
+5.  **Barreras de Entrada:** ¿Qué porcentaje de incremento en ventas estimadas y críticas positivas representa ofrecer un juego en plataformas adicionales o con soporte en múltiples idiomas?
+
+6. **Nichos Rentables:** Desde una óptica de desarrollo de producto, ¿qué combinación de Género y Categoría presenta la menor saturación en el mercado pero la mayor tasa de reseñas positivas?
+
+## 4. Justificación
+
+Este análisis es relevante por tres razones principales:
+
+**Inteligencia de Mercado para Desarrolladores:** Con más de 50,000 juegos en Steam, elegir qué jugar puede ser abrumador. Este estudio ayudará a los usuarios a descubrir juegos destacados más allá de los simples rankings de popularidad, considerando múltiples dimensiones como valoración, tiempo de juego y relación calidad-precio.
+
+**Guía de Consumo para Jugadores:** Entender qué factores (género, precio, modelo de negocio) se asocian con mejores valoraciones y mayor retención de jugadores puede orientar decisiones estratégicas en el desarrollo y publicación de nuevos títulos.
+
+**Valor Académico y Profesional:** Este proyecto nos permite aplicar metodologías profesionales de trabajo colaborativo (Git, ramas, pull requests) y desarrollar habilidades de análisis de datos con R, preparándonos para desafíos reales en el ámbito laboral.
+
+En conjunto, el estudio no solo responde a la pregunta "¿cuáles son los mejores juegos?", sino que también ofrece una metodología replicable para evaluar productos digitales desde múltiples perspectivas.
+
+## 5. Conclusiones Esperadas
+
+A través de la modelación de estos datos, esperamos corroborar las siguientes hipótesis:
+
+**La paradoja del Indie:** Los juegos independientes tendrán, en promedio, mejores ratios de positividad que los AAA, demostrando que la innovación y el enfoque en nichos generan comunidades más leales que las campañas de marketing masivas.
+
+**El dominio del Free to Play:** Se espera demostrar que, si bien el modelo F2P domina la métrica de adquisición, eleva drásticamente las expectativas de tiempo de juego. Esto obliga a los competidores a replantear sus estrategias, ya que el F2P crea barreras de entrada altísimas para los juegos multijugador tradicionales.
+
+**El Precio exacto:** Se descubrirá que la relación entre precio y valoración tiene forma de "U" invertida, donde juegos extremadamente baratos son percibidos como de baja calidad, y los muy caros sufren de expectativas inalcanzables.
+
+**El poder de la Localización:** Los juegos que invierten en localización más allá del idioma inglés mostrarán una penetración de mercado significativamente mayor, justificando el costo de traducción como estrategia de entrada.
