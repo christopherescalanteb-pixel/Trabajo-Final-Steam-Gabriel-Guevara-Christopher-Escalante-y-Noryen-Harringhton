@@ -37,7 +37,7 @@ Identificar los juegos mejor posicionados en Steam desde diferentes perspectivas
 -   **Por Valoración:** Determinar los juegos con mejor relación entre reseñas positivas y negativas (ratio de positividad), considerando también el volumen total de reseñas para evitar sesgos por pocas votaciones.
 -   **Por Tiempo de Juego:** Identificar los juegos con mayor tiempo de juego promedio y mediano, lo que podría indicar su capacidad de retener a los jugadores (factor de "adicción" o "rejugabilidad").
 -   **Por Popularidad:** Señalar los juegos con mayor base de jugadores estimada (columna `owners`), para entender cuáles han logrado el mayor alcance en el mercado.
--   **Por Desarrollador/Publicador:** Analizar si ciertos desarrolladores (como Valve) tienden a producir juegos que destacan en las métricas anteriores.
+-   **Por Desarrollador/Publicador:** Comparar el rendimiento de los juegos indie frente a los juegos de grandes estudios, analizando si los indies tienden a destacar
 -   **Por Género:** Explorar qué géneros de juegos (Acción, RPG, Estrategia, etc.) tienden a obtener mejores valoraciones o mayores tiempos de juego.
 
 ## 3. Preguntas de Investigación
