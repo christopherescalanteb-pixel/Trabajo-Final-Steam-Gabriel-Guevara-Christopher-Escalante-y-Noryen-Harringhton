@@ -58,9 +58,11 @@ Identificar y analizar los patrones de éxito de los videojuegos en Steam desde 
 
 -   **Por Valoración y Retención:** Determinar los juegos con mejor ratio de positividad y mayor tiempo de juego, identificando las mecánicas o categorías que generan mayor fidelidad.
 
--   **Impacto de la Accesibilidad y Expansión:** Evaluar cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial.
+-   **Impacto (**Analisis Descriptivo del Mercado Potencial dado la Accesibilidad y Soporte** JO) de la Accesibilidad y Expansión:** Evaluar (**Describir** JO) cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas **afectan** el tamaño del mercado potencial.
 
 -   **Estacionalidad y Ciclo de Vida:** Explorar si la fecha de lanzamiento revela patrones estacionales favorables para maximizar la visibilidad y las ventas en la plataforma.
+
+(**Analisis de la visibilidad y las ventas de un VJ dado el periodo de lanzamiento** --Tienen que manejo de fechas para crear grupos cuatrimestrales o del periodo que deseen para poder determinarlo y posterior sacar ED--  JO)
 
 ## 3. Preguntas de Investigación
 
