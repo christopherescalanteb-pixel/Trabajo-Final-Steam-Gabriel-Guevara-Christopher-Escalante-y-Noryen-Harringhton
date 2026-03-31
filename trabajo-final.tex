@@ -97,8 +97,7 @@ Estadistica y Ciencias Actuariales}
   \chapter*{Resumen}     % Crea el título "Resumen" sin numeración (Capítulo *)
   \addcontentsline{toc}{chapter}{Resumen} % (Opcional) Lo añade al índice
   
-  Resumen del trabajo de
-investigación\ldots{}             % Aquí se pega el texto que escribiste en el YAML
+  resumen             % Aquí se pega el texto que escribiste en el YAML
   
   \cleardoublepage
 
@@ -109,91 +108,158 @@ investigación\ldots{}             % Aquí se pega el texto que escribiste en el
 \def\baselinestretch{1.5}
 
 % --- CAMBIO CRÍTICO 2: Aquí RMarkdown inyecta todo tu texto ---
-\chapter*{Introducción}
+\chapter*{Introduccion}
 
-Steam es la plataforma de distribución digital de videojuegos más grande
-del mundo, con miles de títulos disponibles y millones de usuarios
-activos diariamente. Cada juego en Steam genera datos valiosos que van
-desde las valoraciones de los jugadores hasta el tiempo que dedican a
-jugarlo. Estos datos representan una oportunidad única para entender qué
-hace que un juego sea exitoso o apreciado por su comunidad.\\
+La industria del entretenimiento interactivo ha experimentado una
+transformación radical en las últimas dos décadas. Steam, la plataforma
+de Valve Corporation, ha pasado de ser una simple tienda de
+actualizaciones para \emph{Counter-Strike} a convertirse en el
+ecosistema digital más grande del mundo para PC, albergando más de
+50,000 títulos y alcanzando picos de 30 millones de usuarios
+concurrentes diarios (Valve, 2024). Sin embargo, esta abundancia de
+oferta ha generado un problema crítico: \textbf{la parálisis por
+decisión y la competencia por la atención del usuario}.\\
 
-Sin embargo para el concepto de ``mejor juego'' es bastante subjetivo y
-puede variar según la perspectiva de cada persona. Para algunos, el
-mejor juego es aquel con las críticas más positivas, mientras que para
-otros, es el que más horas de entretenimiento proporciona, y para otros,
-puede ser el que ha logrado llegar a más personas.
+Para un desarrollador independiente (Indie), lanzar un juego en Steam es
+como arrojar una botella al océano. Para un gigante AAA, es una
+inversión multimillonaria con riesgo incierto. Y en medio de ambos, los
+juegos \emph{Free to Play} (F2P) han transformado las reglas del
+mercado: ya no se compite solo por el precio de entrada, sino por el
+\textbf{tiempo de atención} del jugador, un recurso escaso.\\
+
+El presente trabajo tiene como objetivo descifrar los determinantes del
+éxito en Steam. No se trata solo de ``qué juegos son los mejores'', sino
+de \textbf{cómo compiten diferentes modelos de negocio} (Premium
+vs.~F2P) y \textbf{escalas de producción} (Indie vs.~AAA) en un mercado
+sobresaturado. Utilizando herramientas de análisis de datos en
+\textbf{R} y técnicas estadísticas, descompondremos las variables que
+predicen la valoración, la retención y el alcance de un videojuego.
 
 \chapter{Planteamiento del Problema}
 
-El problema a investigar es: \textbf{¿Qué juegos de Steam pueden
-considerarse los ``mejores'' según diferentes métricas de éxito, como
-las valoraciones de los usuarios, el tiempo de juego y la base de
-jugadores?}\\
+La plataforma Steam es el principal termómetro de la industria de
+videojuegos para PC. Sin embargo, para los desarrolladores y
+publicadores, el lanzamiento de un nuevo título conlleva un
+\textbf{riesgo financiero significativo} debido a tres fenómenos
+concurrentes:
 
-Con este análisis busca ir más allá de las simples listas de popularidad
-para proporcionar una visión multifacética del éxito en la plataforma
-Steam. Debido a esto, se plantea las siguientes preguntas de
-investigación:\\
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Saturación del catálogo:} Con más de 50,000 juegos
+  disponibles, la visibilidad orgánica es casi nula. La mayoría de los
+  títulos nunca reciben suficientes reseñas para ser recomendados
+  algorítmicamente.
+\item
+  \textbf{Guerra de escalas (Indie vs.~AAA):} Los grandes estudios (AAA)
+  dominan el marketing y la producción gráfica, pero los juegos
+  independientes (Indie) suelen innovar en mecánicas y construir
+  comunidades más leales.
+\item
+  \textbf{Disrupción del Free to Play (F2P):} Títulos como \emph{Dota
+  2}, \emph{Counter-Strike: Global Offensive} y \emph{Warframe} han
+  demostrado que eliminar la barrera del precio inicial permite acumular
+  decenas de millones de jugadores, acaparando cientos de horas de juego
+  por usuario. Esto ha cambiado la expectativa del consumidor, que ahora
+  compara un juego de \$60 no solo con otro de \$60, sino con 500 horas
+  gratis en un F2P.
+\end{enumerate}
 
-\textbf{1.} ¿Cuáles son los 10 juegos con mejor ratio de reseñas
-positivas? ¿Cambia esta lista si filtramos por juegos con más de 1000
-reseñas totales?\\
+Desde una perspectiva de ciencia de datos, el problema no es solo
+``identificar juegos exitosos'', sino \textbf{modelar la incertidumbre}
+y entender cómo interactúan las variables de escala (Indie/AAA), modelo
+de negocio (Premium/F2P) y atributos del producto (género, precio,
+soporte multiplataforma) para determinar el éxito.
 
-\textbf{2.} ¿Qué juegos tienen el promedio de tiempo de juego más alto?
-¿Coinciden con los juegos mejor valorados o son diferentes?\\
+\section{Preguntas de investigación}
 
-\textbf{3.} ¿Cuáles son los juegos con mayor número de propietarios
-estimados? ¿Son en su mayoría gratuitos (Free to Play) o de pago?\\
+Derivado de lo anterior, se plantean las siguientes preguntas de
+investigación:
 
-\textbf{4.} ¿Existe una correlación entre el precio de un juego y su
-valoración? ¿Los juegos más caros tienden a ser mejor valorados?\\
+\textbf{1. Guerra de Escalas:} ¿Logran los juegos con la etiqueta
+``Indie'' superar en ratio de reseñas positivas a los juegos de grandes
+publicadores (AAA) a pesar de tener menor volumen de propietarios?
 
-\textbf{5.} ¿Qué géneros tienen en promedio, las mejores valoraciones?
-¿Qué géneros tienen los mayores tiempos de juego?
+\textbf{2. Disrupción del F2P:} ¿Cómo se compara la retención real
+(tiempo de juego) de los gigantes Free to Play frente a los títulos
+Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo
+sobreviven los juegos como servicio?
+
+\textbf{3. Economía del Jugador:} ¿Existe una correlación directa entre
+el precio de un juego y su valoración, o los usuarios son más críticos
+con los juegos más caros?
+
+\textbf{4. Adquisición vs. Retención:} ¿Cuáles son los juegos con mayor
+número de propietarios estimados? ¿Se traduce un alto número de
+descargas en altos promedios de tiempo de juego?
+
+\textbf{5. Barreras de Entrada:} ¿Qué porcentaje de incremento en ventas
+estimadas y críticas positivas representa ofrecer un juego en
+plataformas adicionales (Windows, Mac, Linux) o con soporte en múltiples
+idiomas?
+
+\textbf{6. Nichos Rentables:} Desde una óptica de desarrollo de
+producto, ¿qué combinación de Género y Categoría presenta la menor
+saturación en el mercado pero la mayor tasa de reseñas positivas?
 
 \section{Justificación}
 
-Este análisis es relevante por tres razones principales:
+Este estudio es relevante por tres razones fundamentales:
+
+\textbf{1.} Inteligencia de Mercado para Desarrolladores En un
+ecosistema saturado, conocer qué atributos incrementan la probabilidad
+de éxito permite diseñar productos más competitivos y minimizar riesgos
+financieros.\\
+
+\textbf{2.} Guía Estratégica para Jugadores y Consumidores El análisis
+ayuda a identificar juegos con mejor relación calidad-precio, mayor
+retención y mejores valoraciones, más allá de rankings superficiales.\\
+
+\textbf{3.} Valor Académico y Profesional El proyecto integra:
 
 \begin{itemize}
 \item
-  \textbf{Para los jugadores:} Con más de 50,000 juegos en Steam, elegir
-  qué jugar puede ser abrumador. Este estudio ayudará a los usuarios a
-  descubrir juegos destacados más allá de los simples rankings de
-  popularidad, considerando múltiples dimensiones como valoración,
-  tiempo de juego y relación calidad-precio.
+  Ciencia de datos
 \item
-  \textbf{Para desarrolladores:} Entender qué factores (género, precio,
-  modelo de negocio) se asocian con mejores valoraciones y mayor
-  retención de jugadores puede orientar decisiones estratégicas en el
-  desarrollo y publicación de nuevos títulos.
+  Análisis estadístico
 \item
-  \textbf{Para el equipo:} Este proyecto nos permite aplicar
-  metodologías profesionales de trabajo colaborativo (Git, ramas, pull
-  requests) y desarrollar habilidades de análisis de datos con R,
-  preparándonos para desafíos reales en el ámbito laboral.
+  Visualización
+\item
+  RMarkdown
+\item
+  LaTeX
+\item
+  Trabajo colaborativo con GitHub
 \end{itemize}
 
-En conjunto, el estudio no solo responde a la pregunta ``¿cuáles son los
-mejores juegos?'', sino que también ofrece una metodología replicable
-para evaluar productos digitales desde múltiples perspectivas.
+Esto lo convierte en un ejercicio formativo completo y aplicable al
+ámbito profesional.
 
 \section{Objetivos}
 
 \subsection{Objetivo General}
 
-Identificar los juegos mejor posicionados en Steam desde diferentes
-perspectivas, utilizando los datos disponibles para definir múltiples
-dimensiones de ``éxito'' y ``calidad''.
+Analizar los patrones de éxito de los videojuegos en Steam, evaluando
+cómo variables como precio, género, tiempo de juego, modelo de negocio y
+escala de producción influyen en la valoración y retención de los
+usuarios
 
 \subsection{Objetivos Específicos}
+
 \begin{enumerate}
-  \item{Por Valoración: Determinar los juegos con mejor relación entre reseñas positivas y negativas (ratio de positividad), considerando también el volumen total de reseñas para evitar sesgos por pocas votaciones.}
-  \item{Por Tiempo de Juego: Identificar los juegos con mayor tiempo de juego promedio y mediano, lo que podría indicar su capacidad de retener a los jugadores (factor de "adicción" o "rejugabilidad").}
-  \item{Por Popularidad: Señalar los juegos con mayor base de jugadores estimada (columna `owners`), para entender cuáles han logrado el mayor alcance en el mercado.}
-  \item{Por Desarrollador/Publicador: Comparar el rendimiento de los juegos indie frente a los juegos de grandes estudios, analizando si los indies tienden a destacar}
-  \item{Por Género: Explorar qué géneros de juegos (Acción, RPG, Estrategia, etc.) tienden a obtener mejores valoraciones o mayores tiempos de juego.}
+\item \textbf{Estacionalidad y Ciclo de Vida:} Describir la evolución temporal de las valoraciones y el tiempo de juego, identificando tendencias y puntos de inflexión en la serie de tiempo para determinar patrones estacionales favorables.
+
+\item \textbf{Valoración y Retención por Categorías:} Determinar la influencia de las variables categóricas (Género, Plataforma, Escala de producción) en la distribución de las valoraciones y la retención de jugadores, identificando las mecánicas que generan mayor fidelidad.
+
+\item \textbf{Análisis Competitivo (Indie vs. AAA):} Comparar el rendimiento en mercado de los juegos de grandes publicadores (AAA) frente a los desarrolladores independientes (Indie), evaluando si un menor presupuesto se traduce en menor calidad percibida o si los Indies lideran la satisfacción del usuario.
+
+\item \textbf{Impacto del Modelo Free to Play (F2P):} Evaluar cómo los juegos gratuitos alteran la dinámica competitiva de la industria, analizando su capacidad para acaparar masivamente la cuota de mercado y el tiempo de juego, y cómo esta concentración afecta la viabilidad de los juegos de pago (Premium).
+
+\item \textbf{Rentabilidad del Tiempo (Valor por Hora):} Analizar la relación entre el precio de venta y el tiempo mediano de juego para establecer un "costo por hora de entretenimiento" y entender la disposición a pagar del consumidor.
+
+\item \textbf{Accesibilidad y Expansión de Mercado:} Evaluar cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial y las valoraciones de los usuarios.
+
+\item \textbf{Reporte Técnico Reproducible:} Generar un reporte técnico en formato PDF que integre visualizaciones estadísticas y tablas resumen utilizando RMarkdown y LaTeX, garantizando la reproducibilidad del análisis.
 \end{enumerate}
 
 \section{Cobertura}
@@ -262,10 +328,36 @@ Desarrollo\\
 
 \subsection{Procesamiento y Limpieza de Datos}
 
-Descripción\\
+El proceso de Extracción, Transformación y Carga (ETL) consistió en:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  cargar datos desde el archivo 2.Steam.csv.
+\item
+  Limpieza: Eliminación de registros con valores nulos en variables
+  críticas (price, positive\_ratings, average\_playtime).
+\item
+  Clasificación: Creación de variables derivadas:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  tipo\_juego: ``Indie'' (si tiene etiqueta Indie o desarrollador indie
+  conocido), ``AAA'' (si es de grandes estudios), ``Otros''.
+\item
+  modelo\_negocio: ``Free to Play'' si price == 0, ``Premium'' si price
+  \textgreater{} 0.
+\item
+  ratio\_positivo: positive\_ratings / (positive\_ratings +
+  negative\_ratings).
+\item
+  multiplataforma: ``Multiplataforma'' si platforms contiene punto y
+  coma.
+\end{itemize}
 
 \begin{verbatim}
-## [1] "Registros válidos: 27075 | Variables: 21"
+## [1] "Registros válidos: 27075 | Variables: 22"
 \end{verbatim}
 
 \subsection{Item 2}
@@ -287,13 +379,19 @@ metodologías descritas en el capítulo anterior, así como del análisis
 estadístico descriptivo de las variables estudiadas y las ventajas y
 desventajas al aplicar dichos tests.\}
 
-\section{Presentación de resultados 1}
+\section{Pregunta 1: Guerra de Escalas (Indie vs AAA}
 
-Descripción\\
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-1-1} \end{center}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/top-rating-no-filter-1} \end{center}
+Los juegos Indie muestran una mayor variabilidad en su ratio de reseñas
+positivas, con valores que van desde muy bajos hasta muy altos.
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/top-rating-filter-100000-1} \end{center}
+Los AAA son más consistentes, con distribuciones más estrechas y
+generalmente altas.
+
+No se observa que los Indie superen claramente a los AAA, pero sí que
+algunos Indie alcanzan niveles de valoración tan altos como los mejores
+AAA.
 
 \section{Presentación de resultados 2}
 
@@ -305,9 +403,23 @@ Descripción\\
 
 \chapter{Conclusiones y Recomendaciones}
 
-\textbf{1.-} Conclusion 1 del trabajo de investigación.\\
+\textbf{1.-} La comparación entre juegos AAA e Indie revela que los
+títulos AAA presentan una distribución más concentrada y
+consistentemente alta en el ratio de reseñas positivas, lo que sugiere
+un estándar de calidad más homogéneo. En contraste, los juegos Indie
+exhiben una mayor dispersión: aunque muchos presentan valoraciones
+moderadas o bajas, existe un subconjunto significativo que alcanza
+niveles de aceptación equivalentes o superiores a los AAA. Esto indica
+que, si bien los Indie no superan a los AAA en términos centrales, sí
+poseen un potencial de excelencia que desafía la hegemonía de los
+grandes estudios.\\
 
-\textbf{Recomendación} Recomendación 1 del trabajo de investigación.\\
+\textbf{Recomendación} Dado que los juegos Indie presentan un potencial
+de excelencia comparable al de los AAA, pero con una variabilidad mucho
+mayor, se recomienda fomentar estrategias que reduzcan la dispersión
+negativa ---como QA, marketing y diseño centrado en el usuario---
+mientras se preserva la creatividad que caracteriza al sector
+independiente.\\
 
 \textbf{2.-} Conclusion 2 del trabajo de investigación.\\
 
