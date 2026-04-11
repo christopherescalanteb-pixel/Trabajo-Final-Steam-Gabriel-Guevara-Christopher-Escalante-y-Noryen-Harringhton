@@ -116,9 +116,7 @@ de Valve Corporation, ha pasado de ser una simple tienda de
 actualizaciones para \emph{Counter-Strike} a convertirse en el
 ecosistema digital más grande del mundo para PC, albergando más de
 50,000 títulos y alcanzando picos de 30 millones de usuarios
-concurrentes diarios (Valve, 2024). Sin embargo, esta abundancia de
-oferta ha generado un problema crítico: \textbf{la parálisis por
-decisión y la competencia por la atención del usuario}.\\
+concurrentes diarios (Valve, 2024).\\
 
 Para un desarrollador independiente (Indie), lanzar un juego en Steam es
 como arrojar una botella al océano. Para un gigante AAA, es una
@@ -129,19 +127,18 @@ mercado: ya no se compite solo por el precio de entrada, sino por el
 
 El presente trabajo tiene como objetivo descifrar los determinantes del
 éxito en Steam. No se trata solo de ``qué juegos son los mejores'', sino
-de \textbf{cómo compiten diferentes modelos de negocio} (Premium
-vs.~F2P) y \textbf{escalas de producción} (Indie vs.~AAA) en un mercado
-sobresaturado. Utilizando herramientas de análisis de datos en
-\textbf{R} y técnicas estadísticas, descompondremos las variables que
-predicen la valoración, la retención y el alcance de un videojuego.
+de cómo compiten diferentes modelos de negocio (Premium vs.~F2P) y
+escalas de producción (Indie vs.~AAA) en un mercado sobresaturado.
+Utilizando herramientas de análisis de datos en \textbf{R} y técnicas
+estadísticas, descompondremos las variables que predicen la valoración,
+la retención y el alcance de un videojuego.
 
 \chapter{Planteamiento del Problema}
 
 La plataforma Steam es el principal termómetro de la industria de
 videojuegos para PC. Sin embargo, para los desarrolladores y
-publicadores, el lanzamiento de un nuevo título conlleva un
-\textbf{riesgo financiero significativo} debido a tres fenómenos
-concurrentes:
+publicadores, el lanzamiento de un nuevo título conlleva un riesgo
+financiero significativo debido a tres fenómenos concurrentes:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -174,29 +171,29 @@ soporte multiplataforma) para determinar el éxito.
 \section{Preguntas de investigación}
 
 Derivado de lo anterior, se plantean las siguientes preguntas de
-investigación:
+investigación:\\
 
 \textbf{1. Guerra de Escalas:} ¿Logran los juegos con la etiqueta
 ``Indie'' superar en ratio de reseñas positivas a los juegos de grandes
-publicadores (AAA) a pesar de tener menor volumen de propietarios?
+publicadores (AAA) a pesar de tener menor volumen de propietarios?\\
 
 \textbf{2. Disrupción del F2P:} ¿Cómo se compara la retención real
 (tiempo de juego) de los gigantes Free to Play frente a los títulos
 Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo
-sobreviven los juegos como servicio?
+sobreviven los juegos como servicio?\\
 
 \textbf{3. Economía del Jugador:} ¿Existe una correlación directa entre
 el precio de un juego y su valoración, o los usuarios son más críticos
-con los juegos más caros?
+con los juegos más caros?\\
 
 \textbf{4. Adquisición vs. Retención:} ¿Cuáles son los juegos con mayor
 número de propietarios estimados? ¿Se traduce un alto número de
-descargas en altos promedios de tiempo de juego?
+descargas en altos promedios de tiempo de juego?\\
 
 \textbf{5. Barreras de Entrada:} ¿Qué porcentaje de incremento en ventas
 estimadas y críticas positivas representa ofrecer un juego en
 plataformas adicionales (Windows, Mac, Linux) o con soporte en múltiples
-idiomas?
+idiomas?\\
 
 \textbf{6. Nichos Rentables:} Desde una óptica de desarrollo de
 producto, ¿qué combinación de Género y Categoría presenta la menor
@@ -204,7 +201,7 @@ saturación en el mercado pero la mayor tasa de reseñas positivas?
 
 \section{Justificación}
 
-Este estudio es relevante por tres razones fundamentales:
+Este estudio es relevante por tres razones fundamentales:\\
 
 \textbf{1.} Inteligencia de Mercado para Desarrolladores En un
 ecosistema saturado, conocer qué atributos incrementan la probabilidad
@@ -343,21 +340,29 @@ El proceso de Extracción, Transformación y Carga (ETL) consistió en:
 
 \begin{itemize}
 \item
-  tipo\_juego: ``Indie'' (si tiene etiqueta Indie o desarrollador indie
-  conocido), ``AAA'' (si es de grandes estudios), ``Otros''.
+  Conversión de propietarios: extracción del mínimo, máximo y promedio a
+  partir del rango de propietarios reportado por Steam (owners\_min,
+  owners\_max, owners\_avg).
 \item
-  modelo\_negocio: ``Free to Play'' si price == 0, ``Premium'' si price
-  \textgreater{} 0.
+  ratio\_positivo: proporción de reseñas positivas sobre el total de
+  reseñas.
 \item
-  ratio\_positivo: positive\_ratings / (positive\_ratings +
-  negative\_ratings).
+  modelo\_negocio: clasificación en ``Free to Play'' (si price == 0) o
+  ``Premium'' (si price \textgreater{} 0).
 \item
-  multiplataforma: ``Multiplataforma'' si platforms contiene punto y
-  coma.
+  tipo\_juego: clasificación en ``Indie'', ``AAA'' o ``AA'' según
+  etiquetas y desarrolladores reconocidos.
+\item
+  multiplataforma: identificación de juegos disponibles en más de una
+  plataforma.
+\item
+  owners\_group: agrupación de juegos según su número estimado de
+  propietarios (Menos de 1M, 1M--5M, 5M--10M, 10M--20M, 20M+), utilizada
+  para comparar patrones entre segmentos de distinta popularidad.
 \end{itemize}
 
 \begin{verbatim}
-## [1] "Registros válidos: 27075 | Variables: 22"
+## [1] "Registros válidos: 27075 | Variables: 27"
 \end{verbatim}
 
 \subsection{Item 2}
@@ -379,7 +384,7 @@ metodologías descritas en el capítulo anterior, así como del análisis
 estadístico descriptivo de las variables estudiadas y las ventajas y
 desventajas al aplicar dichos tests.\}
 
-\section{Pregunta 1: Guerra de Escalas (Indie vs AAA}
+\subsection{¿Logran los juegos con la etiqueta "Indie" superar en ratio de reseñas positivas a los juegos de grandes publicadores (AAA) a pesar de tener menor volumen de propietarios?}
 
 \begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-1-1} \end{center}
 
@@ -393,26 +398,77 @@ No se observa que los Indie superen claramente a los AAA, pero sí que
 algunos Indie alcanzan niveles de valoración tan altos como los mejores
 AAA.
 
-\section{Presentación de resultados 2}
+\subsection{¿Cómo se compara la retención real (tiempo de juego) de los gigantes Free to Play frente a los títulos Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo sobreviven los juegos como servicio?}
 
-Descripción\\
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
-\section{Presentación de resultados n}
+Los juegos Free to Play (F2P) muestran una retención mucho más alta a
+medida que crecen en popularidad, mientras que los Premium también
+retienen más cuando son exitosos, pero con una pendiente más suave. Esto
+sugiere que los gigantes F2P sí generan ecosistemas de altísima
+retención, típicos de juegos como servicio, pero no son los únicos: los
+Premium más exitosos también logran retención elevada, aunque con un
+patrón distinto.
 
-Descripción\\
+\subsection{¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?}
+
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-3-1} \end{center}
+
+El precio no determina la valoración.\\
+Los juegos baratos, medianos y caros tienen medianas muy parecidas. No
+se observa que los usuarios sean más críticos con los juegos caros, ni
+que los juegos de mayor precio reciban mejores reseñas.
+
+\subsection{¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Se traduce un alto número de descargas en altos promedios de tiempo de juego?}
+
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+El gráfico muestra una alta concentración de popularidad: pocos títulos
+acumulan la mayoría de propietarios. Esto describe el tamaño del
+mercado, pero no permite inferir compromiso ni tiempo de juego. Es un
+gráfico contextual, no explicativo.
+
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+La mediana del tiempo de juego es similar en casi todos los grupos
+(200--350 min). Esto indica que el comportamiento típico del jugador no
+cambia significativamente según la popularidad del juego. El grupo 20M+
+presenta una mediana mayor, pero esto se debe a títulos excepcionales,
+no a una tendencia general.
+
+\subsection{Evaluar cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial y las valoraciones de los usuarios}
+
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+Los resultados muestran que los juegos multiplataforma presentan un
+promedio de 210.840 propietarios, mientras que los juegos exclusivos de
+Windows alcanzan aproximadamente 97.918 propietarios. En cuanto a las
+críticas positivas, los juegos multiplataforma alcanzan un ratio
+promedio de 75,8\%, frente al 69,4\% de los juegos exclusivos de
+Windows.
+
+\subsection{Desde una óptica de desarrollo de producto, ¿qué combinación de Género y Categoría presenta la menor saturación en el mercado pero la mayor tasa de reseñas positivas?}
+
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+El gráfico muestra que en las primeras posiciones ---como Software
+Training -- AA, Animation \& Modeling -- AAA y Web Publishing -- AA---
+destacan porque tienen pocos competidores y una recepción muy positiva,
+por lo que representan los nichos con mayor potencial para nuevos
+desarrollos.
 
 \chapter{Conclusiones y Recomendaciones}
 
-\textbf{1.-} La comparación entre juegos AAA e Indie revela que los
-títulos AAA presentan una distribución más concentrada y
-consistentemente alta en el ratio de reseñas positivas, lo que sugiere
-un estándar de calidad más homogéneo. En contraste, los juegos Indie
-exhiben una mayor dispersión: aunque muchos presentan valoraciones
-moderadas o bajas, existe un subconjunto significativo que alcanza
-niveles de aceptación equivalentes o superiores a los AAA. Esto indica
-que, si bien los Indie no superan a los AAA en términos centrales, sí
-poseen un potencial de excelencia que desafía la hegemonía de los
-grandes estudios.\\
+\textbf{1.-} \textbf{Conclusion 1 del trabajo de investigación:} La
+comparación entre juegos AAA e Indie revela que los títulos AAA
+presentan una distribución más concentrada y consistentemente alta en el
+ratio de reseñas positivas, lo que sugiere un estándar de calidad más
+homogéneo. En contraste, los juegos Indie exhiben una mayor dispersión:
+aunque muchos presentan valoraciones moderadas o bajas, existe un
+subconjunto significativo que alcanza niveles de aceptación equivalentes
+o superiores a los AAA. Esto indica que, si bien los Indie no superan a
+los AAA en términos centrales, sí poseen un potencial de excelencia que
+desafía la hegemonía de los grandes estudios.\\
 
 \textbf{Recomendación} Dado que los juegos Indie presentan un potencial
 de excelencia comparable al de los AAA, pero con una variabilidad mucho
@@ -421,13 +477,106 @@ negativa ---como QA, marketing y diseño centrado en el usuario---
 mientras se preserva la creatividad que caracteriza al sector
 independiente.\\
 
-\textbf{2.-} Conclusion 2 del trabajo de investigación.\\
+\textbf{2.-} \textbf{Conclusion 2 del trabajo de investigación:} Los
+juegos Free to Play (F2P) muestran una retención mucho más alta a medida
+que crecen en popularidad, mientras que los Premium también retienen más
+cuando son exitosos, pero con una pendiente más suave./
 
-\textbf{Recomendación} Recomendación 2 del trabajo de investigación.\\
+Esto sugiere que los gigantes F2P sí generan ecosistemas de altísima
+retención, típicos de juegos como servicio, pero no son los únicos: los
+Premium más exitosos también logran retención elevada, aunque con un
+patrón distinto.\\
 
-\textbf{n.-} Conclusion n del trabajo de investigación.\\
+\textbf{Recomendación} ya que que los juegos Free to Play muestran una
+retención significativamente mayor a medida que crecen en popularidad,
+se recomienda que los estudios interesados en modelos de servicio
+prioricen estrategias de contenido continuo y sistemas de progresión
+sostenida. Sin embargo, los títulos Premium también pueden alcanzar
+altos niveles de retención mediante experiencias de calidad y contenido
+post‑lanzamiento, lo que sugiere que ambos modelos pueden coexistir con
+éxito si se adaptan a sus fortalezas\\
 
-\textbf{Recomendación} Recomendación n del trabajo de investigación.\\
+\textbf{3.-} \textbf{Conclusion 3 del trabajo de investigación:} El
+análisis mediante boxplots muestra que no existe una relación directa
+entre el precio de un juego y su valoración, Las medianas de todos los
+rangos de precio son muy similares, lo que indica que los juegos
+baratos, intermedios y caros reciben niveles de valoración
+comparables.\\
+
+Incluso en los rangos más altos (60--100 y 100--500 USD), donde podría
+esperarse mayor exigencia por parte de los usuarios, las valoraciones no
+disminuyen de manera sistemática. En conjunto, los datos sugieren que el
+precio no es un factor determinante en la percepción de calidad de los
+usuarios.\\
+
+\textbf{Recomendación} Dado que los distintos rangos de precio muestran
+niveles de valoración muy similares, resulta más efectivo concentrarse
+en mejorar la calidad del juego, la experiencia del usuario y la
+estabilidad del producto. Estos factores parecen influir mucho más en la
+satisfacción del jugador que el precio final. Por ende, se recomienda
+que los desarrolladores no basen su estrategia de precios en la idea de
+que un juego más caro será mejor valorado.\\
+
+\textbf{4.-} \textbf{Conclusion 4 del trabajo de investigación:} El
+análisis muestra que, aunque algunos juegos alcanzan cifras
+extraordinarias de propietarios, esto no se traduce necesariamente en un
+mayor tiempo de juego por parte de los usuarios. El gráfico del Top 10
+evidencia la concentración de popularidad en unos pocos títulos, pero el
+gráfico de medianas confirma que el comportamiento típico del jugador se
+mantiene relativamente estable entre los distintos grupos de
+propietarios. Solo el grupo de más de 20 millones presenta una mediana
+más alta, pero esta diferencia parece deberse a casos puntuales y no a
+una tendencia general. En conjunto, los resultados indican que la
+popularidad de un juego no es un indicador fiable del nivel de
+compromiso de sus jugadores.\\
+
+\textbf{Recomendación} Se considera que no se deberia asumir que una
+base amplia de propietarios garantiza un mayor nivel de compromiso por
+parte de los jugadores. El análisis demuestra que la popularidad por sí
+sola, no explica el tiempo de juego real. Por ello, se recomienda que
+las estrategias de desarrollo y mantenimiento se centren en las
+características internas del producto, como la calidad, la profundidad
+del contenido, la frecuencia de actualizaciones el modelo económico,
+etc. Estos elementos parecen influir de manera más directa en la
+retención y en el tiempo de juego, por lo que priorizarlos permitiría a
+las empresas fomentar un compromiso más sostenido y mejorar el
+rendimiento general de sus títulos.\\
+
+\textbf{5.-} \textbf{Conclusion 5 del trabajo de investigación:} Los
+resultados muestran que los juegos multiplataforma presentan un
+desempeño claramente superior. En promedio, alcanzan más del doble de
+ventas estimadas que los títulos exclusivos de Windows (un incremento
+cercano al 115\%) y obtienen un ratio de reseñas positivas ligeramente
+mayor (aprox. 9\% de mejora relativa). Esto indica que la disponibilidad
+en varias plataformas amplía significativamente el alcance comercial y
+mejora modestamente la percepción del jugador.\\
+
+\textbf{Recomendación} Se recomienda prorizar el desarrollo
+multiplataforma, ya que esta estrategia se asocia con un aumento
+sustancial en ventas y una mejor recepción del público. Expandir el
+soporte más allá de Windows permite acceder a nuevos segmentos de
+mercado y fortalecer la valoración del producto, lo que puede traducirse
+en un mayor rendimiento comercial.\\
+
+\textbf{6.-} \textbf{Conclusion 6 del trabajo de investigación:} El
+análisis muestra que las combinaciones de género y categoría con mayor
+potencial son aquellas que presentan simultáneamente baja saturación y
+alta valoración por parte de los usuarios. Entre las mejores
+oportunidades destacan Software Training -- AA, Animation \& Modeling --
+AAA y Web Publishing -- AA, segmentos donde la competencia es limitada y
+la recepción del público es consistentemente positiva. Estos resultados
+indican que existen nichos específicos dentro del mercado que ofrecen
+condiciones favorables para el desarrollo de nuevos productos.\\
+
+\textbf{Recomendación} Se recomienda priorizar el desarrollo en
+combinaciones de género y categoría que obtuvieron un índice de
+oportunidad elevado, ya que representan nichos poco competidos con alta
+aceptación del usuario. En particular, los segmentos liderados por
+géneros como Software Training, Animation \& Modeling y Web Publishing
+ofrecen un entorno estratégico para maximizar diferenciación,
+visibilidad y probabilidad de éxito comercial. Apostar por estos nichos
+permite a las empresas posicionarse en mercados con menor presión
+competitiva y mayor potencial de crecimiento.
 
 \appendix
 \renewcommand{\thechapter}{\Alph{chapter}}
