@@ -147,50 +147,70 @@ multiplataforma) para determinar el éxito.
 Derivado de lo anterior, se plantean las siguientes preguntas de
 investigación:\
 
-\textbf{1. Guerra de Escalas:} ¿Logran los juegos con la etiqueta "Indie" superar en ratio de reseñas positivas a los juegos de grandes publicadores (AAA) a pesar de tener menor volumen de propietarios?\
+\textbf{1. Guerra de Escalas:} ¿Logran los juegos con la etiqueta
+"Indie" superar en ratio de reseñas positivas a los juegos de grandes
+publicadores (AAA) a pesar de tener menor volumen de propietarios?\
 
-\textbf{2. Disrupción del F2P:} ¿Cómo se compara la retención real (tiempo de juego) de los gigantes Free to Play frente a los títulos Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo sobreviven los juegos como servicio?\
+\textbf{2. Disrupción del F2P:} ¿Cómo se compara la retención real
+(tiempo de juego) de los gigantes Free to Play frente a los títulos
+Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo
+sobreviven los juegos como servicio?\
 
-\textbf{3. Economía del Jugador:} ¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?\
+\textbf{3. Economía del Jugador:} ¿Existe una correlación directa entre
+el precio de un juego y su valoración, o los usuarios son más críticos
+con los juegos más caros?\
 
-\textbf{4. Adquisición vs. Retención:} ¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Se traduce un alto número de descargas en altos promedios de tiempo de juego?\
+\textbf{4. Adquisición vs. Retención:} ¿Cuáles son los juegos con mayor
+número de propietarios estimados? ¿Se traduce un alto número de
+descargas en altos promedios de tiempo de juego?\
 
-\textbf{5. Barreras de Entrada:} ¿Qué porcentaje de incremento en ventas estimadas y críticas positivas representa ofrecer un juego en plataformas adicionales (Windows, Mac, Linux) o con soporte en múltiples idiomas?\
+\textbf{5. Barreras de Entrada:} ¿Qué porcentaje de incremento en ventas
+estimadas y críticas positivas representa ofrecer un juego en
+plataformas adicionales (Windows, Mac, Linux) o con soporte en múltiples
+idiomas?\
 
-\textbf{6. Nichos Rentables:} Desde una óptica de desarrollo de producto, ¿qué combinación de Género y Categoría presenta la menor saturación en el mercado pero la mayor tasa de reseñas positivas?
+\textbf{6. Nichos Rentables:} Desde una óptica de desarrollo de
+producto, ¿qué combinación de Género y Categoría presenta la menor
+saturación en el mercado pero la mayor tasa de reseñas positivas?
 
 \section{Justificación}
 
 Este estudio es relevante por tres razones fundamentales:\
 
-**1.** Inteligencia de Mercado para Desarrolladores
-En un ecosistema saturado, conocer qué atributos incrementan la probabilidad de éxito permite diseñar productos más competitivos y minimizar riesgos financieros.\
+**1.** Inteligencia de Mercado para Desarrolladores En un ecosistema
+saturado, conocer qué atributos incrementan la probabilidad de éxito
+permite diseñar productos más competitivos y minimizar riesgos
+financieros.\
 
-**2.** Guía Estratégica para Jugadores y Consumidores
-El análisis ayuda a identificar juegos con mejor relación calidad-precio, mayor retención y mejores valoraciones, más allá de rankings superficiales.\
+**2.** Guía Estratégica para Jugadores y Consumidores El análisis ayuda
+a identificar juegos con mejor relación calidad-precio, mayor retención
+y mejores valoraciones, más allá de rankings superficiales.\
 
-**3.** Valor Académico y Profesional
-El proyecto integra:
+**3.** Valor Académico y Profesional El proyecto integra:
 
-- Ciencia de datos
+-   Ciencia de datos
 
-- Análisis estadístico
+-   Análisis estadístico
 
-- Visualización
+-   Visualización
 
-- RMarkdown
+-   RMarkdown
 
-- LaTeX
+-   LaTeX
 
-- Trabajo colaborativo con GitHub
+-   Trabajo colaborativo con GitHub
 
-Esto lo convierte en un ejercicio formativo completo y aplicable al ámbito profesional.
+Esto lo convierte en un ejercicio formativo completo y aplicable al
+ámbito profesional.
 
 \section{Objetivos}
 
 \subsection{Objetivo General}
 
-Analizar los patrones de éxito de los videojuegos en Steam, evaluando cómo variables como precio, género, tiempo de juego, modelo de negocio y escala de producción influyen en la valoración y retención de los usuarios
+Analizar los patrones de éxito de los videojuegos en Steam, evaluando
+cómo variables como precio, género, tiempo de juego, modelo de negocio y
+escala de producción influyen en la valoración y retención de los
+usuarios
 
 \subsection{Objetivos Específicos}
 
@@ -210,63 +230,147 @@ Analizar los patrones de éxito de los videojuegos en Steam, evaluando cómo var
 \item \textbf{Reporte Técnico Reproducible:} Generar un reporte técnico en formato PDF que integre visualizaciones estadísticas y tablas resumen utilizando RMarkdown y LaTeX, garantizando la reproducibilidad del análisis.
 \end{enumerate}
 
-
-
 \section{Cobertura}
 
 \subsection{Horizontal}
 
-Describir la cobertura Horizontal del trabajo de investigación\
+La cobertura horizontal abarca las características intrínsecas de cada videojuego registrado en la base de datos de Steam. Se consideran las siguientes variables:
 
 \begin{table}[ht]
 \centering
-\caption{Variables consideradas} 
-\resizebox{10cm}{!} {
-\begin{tabular}{ccc}
-  \hline
-\ \ \ \ \ NOMBRE DE LA VARIABLE \\ 
-  \hline
-   VARIABLE 1 \\ 
-VARIABLE 2\\ 
-VARIABLE n\\ 
-   \hline
-\end{tabular}
+\caption{Variables consideradas en el estudio}
+\resizebox{12cm}{!}{%
+\begin{tabular}{cll}
+\hline
+\textbf{TIPO} & \textbf{VARIABLE} & \textbf{DESCRIPCIÓN} \\
+\hline
+Categórica & name & Nombre comercial del videojuego \\
+Categórica & developer & Desarrollador del juego \\
+Categórica & publisher & Publicador/Editor \\
+Numérica & price & Precio en USD \\
+Categórica & genres & Género del juego (Action, RPG, Strategy, etc.) \\
+Numérica & positive\_ratings & Número de reseñas positivas \\
+Numérica & negative\_ratings & Número de reseñas negativas \\
+Numérica & average\_playtime & Tiempo promedio de juego (minutos) \\
+Numérica & median\_playtime & Tiempo mediano de juego (minutos) \\
+Categórica & owners & Rango estimado de propietarios \\
+Categórica & platforms & Plataformas disponibles (Windows, Mac, Linux) \\
+Categórica & steamspy\_tags & Etiquetas de comunidad (Indie, FPS, etc.) \\
+\hline
+\end{tabular}%
 }
 \end{table}
 
 \subsection{Vertical}
 
-Describir la cobertura Vertical del trabajo de investigación
+La cobertura vertical del trabajo de investigación comprende un total de
+27,000+ observaciones (registros). Cada fila representa un
+videojuego único disponible en Steam. El alcance temporal de los datos abarca desde el año 1998 hasta el año 2019, lo que permite un análisis de series de tiempo de largo
+plazo.
 
 \section{Periodo de Referencia}
 
-Describir la fuente y el Periodo de Referencia utilizado en el trabajo
-de investigación
+```{r}
+min(steam_data$release_date, na.rm = TRUE)
+max(steam_data$release_date, na.rm = TRUE)
+```
+El periodo de referencia del estudio abarca desde el 30 de junio de 1997 hasta el 1 de mayo de 2019, correspondiente al rango temporal completo disponible en el dataset de Steam utilizado para el análisis.
 
 \section{Variables}
 
-Describir la variable en estudio en el trabajo de investigación
+\subsection{Variables Dependientes (Éxito del Videojuego)}
+
+El éxito del videojuego se mide a través de tres dimensiones:
+
+\begin{enumerate}
+  \item \textbf{Valoración:} Ratio de reseñas positivas:
+  $$\text{ratio\_positivo} = \frac{\text{positive\_ratings}}{\text{positive\_ratings} + \text{negative\_ratings}}$$
+  
+  \item \textbf{Retención:} Tiempo promedio de juego (\texttt{average\_playtime}) en minutos.
+  
+  \item \textbf{Alcance:} Base de jugadores estimada a partir de \texttt{owners}. Se extrajeron tres variables derivadas:
+  \begin{itemize}
+    \item \texttt{owners\_min}: Límite inferior del rango.
+    \item \texttt{owners\_max}: Límite superior del rango.
+    \item \texttt{owners\_avg}: Promedio del rango.
+    \item \texttt{owners\_group}: Categoría derivada (Menos de 1M, 1M-5M, 5M-10M, 10M-20M, 20M+).
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Variables Independientes (Explicativas)}
+
+\begin{enumerate}
+  \item \textbf{Escala de producción:} Clasificación en tres categorías:
+  \begin{itemize}
+    \item \textbf{Indie:} Juegos con la etiqueta "Indie" en \texttt{steamspy\_tags}.
+    \item \textbf{AAA:} Juegos desarrollados por grandes publicadores (Valve, Ubisoft, EA, Activision, Bethesda, Rockstar, Capcom, Square Enix, SEGA, 2K, Bandai Namco).
+    \item \textbf{AA:} El resto de los juegos.
+  \end{itemize}
+  
+  \item \textbf{Modelo de negocio:}
+  \begin{itemize}
+    \item \textbf{Free to Play (F2P):} Juegos con precio igual a \$0 USD.
+    \item \textbf{Premium:} Juegos con precio mayor a \$0 USD.
+  \end{itemize}
+  
+  \item \textbf{Atributos del producto:}
+  \begin{itemize}
+    \item \textbf{Precio:} Variable numérica (\texttt{price}) en USD.
+    \item \textbf{Género:} Variable categórica (\texttt{genres}). Se extrajo el género principal (\texttt{genre\_main}) como el primer valor.
+    \item \textbf{Soporte multiplataforma:} Variable binaria que indica si el juego está disponible en más de una plataforma (Windows, Mac, Linux).
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Variables Derivadas para Segmentación}
+
+\begin{itemize}
+  \item \texttt{price\_bin}: Rangos de precio (0-5, 5-10, 10-20, 20-40, 40-60, 60-100, 100-500 USD).
+  \item \texttt{Índice de Oportunidad}: 
+  $$\text{Índice de Oportunidad} = \frac{\text{Ratio Promedio de Valoración}}{\ln(\text{Número de Juegos} + 1)}$$
+\end{itemize}
 
 \chapter{Marco Teórico}
 
 \section{Bases Teóricas}
 
-Resumen de las bases teoricas explicadas en el capitulo y su
-importancia\
+\subsection{Análisis Exploratorio de Datos (EDA)}
 
-\subsection{Definición 1}
+Formalizado por John Tukey, el EDA resume características principales de un conjunto de datos mediante métodos visuales. Para una variable aleatoria continua $X$, se definen:
 
-Descripción de la definición 1\
+\begin{itemize}
+  \item Media muestral: $\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$
+  \item Varianza: $S^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^{2}$
+\end{itemize}
 
-\subsection{Definición 2}
+\subsection{Correlación de Pearson}
 
-Descripción de la definición 2\
+Mide la relación lineal entre dos variables:
 
-\subsection{Definición n}
+$$\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}$$
 
-Descripción de la definición n\
+\subsection{Variables Categóricas}
 
-\chapter{Marco Metódico}
+Se codifican mediante variables \textit{dummy} o \textit{one-hot} para su uso en modelos.
+
+\section{Clasificación por Escala de Producción}
+
+\begin{itemize}
+  \item \textbf{Indie:} Equipos pequeños (1-15 personas), presupuesto \$50k-\$500k, auto-publicados.
+  \item \textbf{AA:} Estudios medianos (20-100 personas), presupuesto \$1M-\$10M.
+  \item \textbf{AAA:} Grandes estudios (100+ personas), presupuesto \$50M-\$200M+.
+\end{itemize}
+
+\section{Modelo Free to Play vs Premium}
+
+Los F2P eliminan la barrera de precio y generan ingresos mediante microtransacciones. Títulos como \textit{Dota 2} y \textit{CS:GO} demuestran que este modelo puede lograr altísima retención.
+
+\section{Índice de Oportunidad}
+
+$$\text{Índice de Oportunidad} = \frac{\text{Ratio Promedio de Valoración}}{\ln(\text{Número de Juegos} + 1)}$$
+
+Penaliza la saturación y premia la alta valoración, identificando nichos con potencial.
+
+\chapter{Marco Metodologico}
 
 En esta sección se presentan las metodologías y/o test necesarios
 relacionados con la práctica divulgada en el marco teórico, así como las
@@ -274,29 +378,44 @@ fuentes de datos.
 
 \section{Bases metódicas utilizadas en el trabajo de investigación}
 
-Desarrollo\
+El estudio se fundamentó en un enfoque cuantitativo y descriptivo, utilizando técnicas de análisis exploratorio de datos (EDA) para identificar patrones, distribuciones y relaciones entre las variables del dataset de Steam. Se aplicaron métodos de limpieza y transformación y de datos mediante el uso de R y el ecosistema tidyverse.\
+
+Se emplearon medidas estadísticas como medias, medianas, proporciones y correlaciones para caracterizar el comportamiento de las variables clave. Asimismo, se utilizaron visualizaciones como boxplots, gráficos de dispersión, gráficos de barras y series temporales para facilitar la interpretación de los resultados.\
+
+Para la identificación de nichos de mercado se construyó un Índice de Oportunidad, basado en la relación entre valoración promedio y saturación del género, permitiendo comparar segmentos de forma mas objetiva.\
+
+Todo el procesamiento, análisis y generación de gráficos se realizó mediante un flujo reproducible en RMarkdown, garantizando transparencia, trazabilidad y replicabilidad del estudio.
 
 \subsection{Procesamiento y Limpieza de Datos}
 
 El proceso de Extracción, Transformación y Carga (ETL) consistió en:
 
-1. cargar datos desde el archivo 2.Steam.csv.
+1.  cargar datos desde el archivo 2.Steam.csv.
 
-2. Limpieza: Eliminación de registros con valores nulos en variables críticas (price, positive_ratings, average_playtime).
+2.  Limpieza: Eliminación de registros con valores nulos en variables
+    críticas (price, positive_ratings, average_playtime).
 
-3. Clasificación: Creación de variables derivadas:
+3.  Clasificación: Creación de variables derivadas:
 
-- Conversión de propietarios: extracción del mínimo, máximo y promedio a partir del rango de propietarios reportado por Steam (owners_min, owners_max, owners_avg).
+-   Conversión de propietarios: extracción del mínimo, máximo y promedio
+    a partir del rango de propietarios reportado por Steam (owners_min,
+    owners_max, owners_avg).
 
-- ratio_positivo: proporción de reseñas positivas sobre el total de reseñas.
+-   ratio_positivo: proporción de reseñas positivas sobre el total de
+    reseñas.
 
-- modelo_negocio: clasificación en “Free to Play” (si price == 0) o “Premium” (si price > 0).
+-   modelo_negocio: clasificación en “Free to Play” (si price == 0) o
+    “Premium” (si price \> 0).
 
-- tipo_juego: clasificación en “Indie”, “AAA” o “AA” según etiquetas y desarrolladores reconocidos.
+-   tipo_juego: clasificación en “Indie”, “AAA” o “AA” según etiquetas y
+    desarrolladores reconocidos.
 
-- multiplataforma: identificación de juegos disponibles en más de una plataforma.
+-   multiplataforma: identificación de juegos disponibles en más de una
+    plataforma.
 
-- owners_group: agrupación de juegos según su número estimado de propietarios (Menos de 1M, 1M–5M, 5M–10M, 10M–20M, 20M+), utilizada para comparar patrones entre segmentos de distinta popularidad.
+-   owners_group: agrupación de juegos según su número estimado de
+    propietarios (Menos de 1M, 1M–5M, 5M–10M, 10M–20M, 20M+), utilizada
+    para comparar patrones entre segmentos de distinta popularidad.
 
 ```{r etl-process, echo=FALSE, message=FALSE, warning=FALSE}
 # Verificación de dimensiones post-limpieza
@@ -305,10 +424,9 @@ dim_desc <- paste("Registros válidos:", nrow(steam_data),
 print(dim_desc)
 ```
 
+\section{Pruebas y Visualización}
 
-\subsection{Item 2}
-
-Descripción\
+Se utilizaron boxplots, gráficos de dispersión, gráficos de barras y el Índice de Oportunidad. Las herramientas fueron R, RStudio y los paquetes \texttt{tidyverse}, \texttt{knitr}, \texttt{kableExtra}, \texttt{scales}, \texttt{lubridate}, \texttt{patchwork}.
 
 \subsubsection{Item 2.2}
 
@@ -339,11 +457,16 @@ steam_data %>%
   scale_y_continuous(labels = percent)
 
 ```
-Los juegos Indie muestran una mayor variabilidad en su ratio de reseñas positivas, con valores que van desde muy bajos hasta muy altos.
 
-Los AAA son más consistentes, con distribuciones más estrechas y generalmente altas.
+Los juegos Indie muestran una mayor variabilidad en su ratio de reseñas
+positivas, con valores que van desde muy bajos hasta muy altos.
 
-No se observa que los Indie superen claramente a los AAA, pero sí que algunos Indie alcanzan niveles de valoración tan altos como los mejores AAA.
+Los AAA son más consistentes, con distribuciones más estrechas y
+generalmente altas.
+
+No se observa que los Indie superen claramente a los AAA, pero sí que
+algunos Indie alcanzan niveles de valoración tan altos como los mejores
+AAA.
 
 \subsection{¿Cómo se compara la retención real (tiempo de juego) de los gigantes Free to Play frente a los títulos Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo sobreviven los juegos como servicio?}
 
@@ -364,8 +487,14 @@ steam_data %>%
   scale_color_manual(values = c("Free to Play" = "purple", "Premium" = "green")) +
   coord_cartesian(ylim = c(0, 800))
 ```
-Los juegos Free to Play (F2P) muestran una retención mucho más alta a medida que crecen en popularidad, mientras que los Premium también retienen más cuando son exitosos, pero con una pendiente más suave.
-Esto sugiere que los gigantes F2P sí generan ecosistemas de altísima retención, típicos de juegos como servicio, pero no son los únicos: los Premium más exitosos también logran retención elevada, aunque con un patrón distinto.
+
+Los juegos Free to Play (F2P) muestran una retención mucho más alta a
+medida que crecen en popularidad, mientras que los Premium también
+retienen más cuando son exitosos, pero con una pendiente más suave. Esto
+sugiere que los gigantes F2P sí generan ecosistemas de altísima
+retención, típicos de juegos como servicio, pero no son los únicos: los
+Premium más exitosos también logran retención elevada, aunque con un
+patrón distinto.
 
 \subsection{¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?}
 
@@ -388,8 +517,11 @@ steam_data %>%
   theme(legend.position = "none")
 
 ```
-El precio no determina la valoración.  
-Los juegos baratos, medianos y caros tienen medianas muy parecidas. No se observa que los usuarios sean más críticos con los juegos caros, ni que los juegos de mayor precio reciban mejores reseñas.
+
+El precio no determina la valoración.\
+Los juegos baratos, medianos y caros tienen medianas muy parecidas. No
+se observa que los usuarios sean más críticos con los juegos caros, ni
+que los juegos de mayor precio reciban mejores reseñas.
 
 \subsection{¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Se traduce un alto número de descargas en altos promedios de tiempo de juego?}
 
@@ -414,7 +546,11 @@ ggplot(top_propietarios, aes(x = reorder(name, owners_avg),
   theme(legend.position = "none")
 
 ```
-El gráfico muestra una alta concentración de popularidad: pocos títulos acumulan la mayoría de propietarios. Esto describe el tamaño del mercado, pero no permite inferir compromiso ni tiempo de juego. Es un gráfico contextual, no explicativo.
+
+El gráfico muestra una alta concentración de popularidad: pocos títulos
+acumulan la mayoría de propietarios. Esto describe el tamaño del
+mercado, pero no permite inferir compromiso ni tiempo de juego. Es un
+gráfico contextual, no explicativo.
 
 ```{r}
  medianas <- steam_data %>%
@@ -434,8 +570,12 @@ ggplot(medianas, aes(x = owners_group, y = mediana, fill = owners_group)) +
 
 
 ```
-La mediana del tiempo de juego es similar en casi todos los grupos (200–350 min). Esto indica que el comportamiento típico del jugador no cambia significativamente según la popularidad del juego.
-El grupo 20M+ presenta una mediana mayor, pero esto se debe a títulos excepcionales, no a una tendencia general.
+
+La mediana del tiempo de juego es similar en casi todos los grupos
+(200–350 min). Esto indica que el comportamiento típico del jugador no
+cambia significativamente según la popularidad del juego. El grupo 20M+
+presenta una mediana mayor, pero esto se debe a títulos excepcionales,
+no a una tendencia general.
 
 \subsection{Evaluar cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial y las valoraciones de los usuarios}
 
@@ -478,7 +618,12 @@ g1 + g2
 
 
 ```
-Los resultados muestran que los juegos multiplataforma presentan un promedio de 210.840 propietarios, mientras que los juegos exclusivos de Windows alcanzan aproximadamente 97.918 propietarios. En cuanto a las críticas positivas, los juegos multiplataforma alcanzan un ratio promedio de 75,8%, frente al 69,4% de los juegos exclusivos de Windows.
+
+Los resultados muestran que los juegos multiplataforma presentan un
+promedio de 210.840 propietarios, mientras que los juegos exclusivos de
+Windows alcanzan aproximadamente 97.918 propietarios. En cuanto a las
+críticas positivas, los juegos multiplataforma alcanzan un ratio
+promedio de 75,8%, frente al 69,4% de los juegos exclusivos de Windows.
 
 \subsection{Desde una óptica de desarrollo de producto, ¿qué combinación de Género y Categoría presenta la menor saturación en el mercado pero la mayor tasa de reseñas positivas?}
 
@@ -508,38 +653,131 @@ ggplot(combo, aes(x = reorder(combo_label, indice_oportunidad), y = indice_oport
   ) +
   theme_minimal()
 ```
-El gráfico muestra que en las primeras posiciones —como Software Training – AA, Animation & Modeling – AAA y Web Publishing – AA— destacan porque tienen pocos competidores y una recepción muy positiva, por lo que representan los nichos con mayor potencial para nuevos desarrollos.
+
+El gráfico muestra que en las primeras posiciones —como Software
+Training – AA, Animation & Modeling – AAA y Web Publishing – AA—
+destacan porque tienen pocos competidores y una recepción muy positiva,
+por lo que representan los nichos con mayor potencial para nuevos
+desarrollos.
 
 \chapter{Conclusiones y Recomendaciones}
 
-\textbf{1.-} **Conclusion 1 del trabajo de investigación:** La comparación entre juegos AAA e Indie revela que los títulos AAA presentan una distribución más concentrada y consistentemente alta en el ratio de reseñas positivas, lo que sugiere un estándar de calidad más homogéneo. En contraste, los juegos Indie exhiben una mayor dispersión: aunque muchos presentan valoraciones moderadas o bajas, existe un subconjunto significativo que alcanza niveles de aceptación equivalentes o superiores a los AAA. Esto indica que, si bien los Indie no superan a los AAA en términos centrales, sí poseen un potencial de excelencia que desafía la hegemonía de los grandes estudios.\
+\textbf{1.-} **Conclusion 1 del trabajo de investigación:** La
+comparación entre juegos AAA e Indie revela que los títulos AAA
+presentan una distribución más concentrada y consistentemente alta en el
+ratio de reseñas positivas, lo que sugiere un estándar de calidad más
+homogéneo. En contraste, los juegos Indie exhiben una mayor dispersión:
+aunque muchos presentan valoraciones moderadas o bajas, existe un
+subconjunto significativo que alcanza niveles de aceptación equivalentes
+o superiores a los AAA. Esto indica que, si bien los Indie no superan a
+los AAA en términos centrales, sí poseen un potencial de excelencia que
+desafía la hegemonía de los grandes estudios.\
 
-\textbf{Recomendación} Dado que los juegos Indie presentan un potencial de excelencia comparable al de los AAA, pero con una variabilidad mucho mayor, se recomienda fomentar estrategias que reduzcan la dispersión negativa —como QA, marketing y diseño centrado en el usuario— mientras se preserva la creatividad que caracteriza al sector independiente.\
+\textbf{Recomendación} Dado que los juegos Indie presentan un potencial
+de excelencia comparable al de los AAA, pero con una variabilidad mucho
+mayor, se recomienda fomentar estrategias que reduzcan la dispersión
+negativa —como QA, marketing y diseño centrado en el usuario— mientras
+se preserva la creatividad que caracteriza al sector independiente.\
 
-\textbf{2.-} **Conclusion 2 del trabajo de investigación:** Los juegos Free to Play (F2P) muestran una retención mucho más alta a medida que crecen en popularidad, mientras que los Premium también retienen más cuando son exitosos, pero con una pendiente más suave./
+\textbf{2.-} **Conclusion 2 del trabajo de investigación:** Los juegos
+Free to Play (F2P) muestran una retención mucho más alta a medida que
+crecen en popularidad, mientras que los Premium también retienen más
+cuando son exitosos, pero con una pendiente más suave./
 
-Esto sugiere que los gigantes F2P sí generan ecosistemas de altísima retención, típicos de juegos como servicio, pero no son los únicos: los Premium más exitosos también logran retención elevada, aunque con un patrón distinto.\
+Esto sugiere que los gigantes F2P sí generan ecosistemas de altísima
+retención, típicos de juegos como servicio, pero no son los únicos: los
+Premium más exitosos también logran retención elevada, aunque con un
+patrón distinto.\
 
-\textbf{Recomendación} ya que que los juegos Free to Play muestran una retención significativamente mayor a medida que crecen en popularidad, se recomienda que los estudios interesados en modelos de servicio prioricen estrategias de contenido continuo y sistemas de progresión sostenida. Sin embargo, los títulos Premium también pueden alcanzar altos niveles de retención mediante experiencias de calidad y contenido post‑lanzamiento, lo que sugiere que ambos modelos pueden coexistir con éxito si se adaptan a sus fortalezas\
+\textbf{Recomendación} ya que que los juegos Free to Play muestran una
+retención significativamente mayor a medida que crecen en popularidad,
+se recomienda que los estudios interesados en modelos de servicio
+prioricen estrategias de contenido continuo y sistemas de progresión
+sostenida. Sin embargo, los títulos Premium también pueden alcanzar
+altos niveles de retención mediante experiencias de calidad y contenido
+post‑lanzamiento, lo que sugiere que ambos modelos pueden coexistir con
+éxito si se adaptan a sus fortalezas\
 
-\textbf{3.-} **Conclusion 3 del trabajo de investigación:** El análisis mediante boxplots muestra que no existe una relación directa entre el precio de un juego y su valoración, Las medianas de todos los rangos de precio son muy similares, lo que indica que los juegos baratos, intermedios y caros reciben niveles de valoración comparables.\
+\textbf{3.-} **Conclusion 3 del trabajo de investigación:** El análisis
+mediante boxplots muestra que no existe una relación directa entre el
+precio de un juego y su valoración, Las medianas de todos los rangos de
+precio son muy similares, lo que indica que los juegos baratos,
+intermedios y caros reciben niveles de valoración comparables.\
 
-Incluso en los rangos más altos (60–100 y 100–500 USD), donde podría esperarse mayor exigencia por parte de los usuarios, las valoraciones no disminuyen de manera sistemática.
-En conjunto, los datos sugieren que el precio no es un factor determinante en la percepción de calidad de los usuarios.\
+Incluso en los rangos más altos (60–100 y 100–500 USD), donde podría
+esperarse mayor exigencia por parte de los usuarios, las valoraciones no
+disminuyen de manera sistemática. En conjunto, los datos sugieren que el
+precio no es un factor determinante en la percepción de calidad de los
+usuarios.\
 
-\textbf{Recomendación} Dado que los distintos rangos de precio muestran niveles de valoración muy similares, resulta más efectivo concentrarse en mejorar la calidad del juego, la experiencia del usuario y la estabilidad del producto. Estos factores parecen influir mucho más en la satisfacción del jugador que el precio final. Por ende, se recomienda que los desarrolladores no basen su estrategia de precios en la idea de que un juego más caro será mejor valorado.\
+\textbf{Recomendación} Dado que los distintos rangos de precio muestran
+niveles de valoración muy similares, resulta más efectivo concentrarse
+en mejorar la calidad del juego, la experiencia del usuario y la
+estabilidad del producto. Estos factores parecen influir mucho más en la
+satisfacción del jugador que el precio final. Por ende, se recomienda
+que los desarrolladores no basen su estrategia de precios en la idea de
+que un juego más caro será mejor valorado.\
 
-\textbf{4.-} **Conclusion 4 del trabajo de investigación:** El análisis muestra que, aunque algunos juegos alcanzan cifras extraordinarias de propietarios, esto no se traduce necesariamente en un mayor tiempo de juego por parte de los usuarios. El gráfico del Top 10 evidencia la concentración de popularidad en unos pocos títulos, pero el gráfico de medianas confirma que el comportamiento típico del jugador se mantiene relativamente estable entre los distintos grupos de propietarios. Solo el grupo de más de 20 millones presenta una mediana más alta, pero esta diferencia parece deberse a casos puntuales y no a una tendencia general. En conjunto, los resultados indican que la popularidad de un juego no es un indicador fiable del nivel de compromiso de sus jugadores.\
+\textbf{4.-} **Conclusion 4 del trabajo de investigación:** El análisis
+muestra que, aunque algunos juegos alcanzan cifras extraordinarias de
+propietarios, esto no se traduce necesariamente en un mayor tiempo de
+juego por parte de los usuarios. El gráfico del Top 10 evidencia la
+concentración de popularidad en unos pocos títulos, pero el gráfico de
+medianas confirma que el comportamiento típico del jugador se mantiene
+relativamente estable entre los distintos grupos de propietarios. Solo
+el grupo de más de 20 millones presenta una mediana más alta, pero esta
+diferencia parece deberse a casos puntuales y no a una tendencia
+general. En conjunto, los resultados indican que la popularidad de un
+juego no es un indicador fiable del nivel de compromiso de sus
+jugadores.\
 
-\textbf{Recomendación} Se considera que no se deberia asumir que una base amplia de propietarios garantiza un mayor nivel de compromiso por parte de los jugadores. El análisis demuestra que la popularidad por sí sola, no explica el tiempo de juego real. Por ello, se recomienda que las estrategias de desarrollo y mantenimiento se centren en las características internas del producto, como la calidad, la profundidad del contenido, la frecuencia de actualizaciones el modelo económico, etc. Estos elementos parecen influir de manera más directa en la retención y en el tiempo de juego, por lo que priorizarlos permitiría a las empresas fomentar un compromiso más sostenido y mejorar el rendimiento general de sus títulos.\
+\textbf{Recomendación} Se considera que no se deberia asumir que una
+base amplia de propietarios garantiza un mayor nivel de compromiso por
+parte de los jugadores. El análisis demuestra que la popularidad por sí
+sola, no explica el tiempo de juego real. Por ello, se recomienda que
+las estrategias de desarrollo y mantenimiento se centren en las
+características internas del producto, como la calidad, la profundidad
+del contenido, la frecuencia de actualizaciones el modelo económico,
+etc. Estos elementos parecen influir de manera más directa en la
+retención y en el tiempo de juego, por lo que priorizarlos permitiría a
+las empresas fomentar un compromiso más sostenido y mejorar el
+rendimiento general de sus títulos.\
 
-\textbf{5.-} **Conclusion 5 del trabajo de investigación:** Los resultados muestran que los juegos multiplataforma presentan un desempeño claramente superior. En promedio, alcanzan más del doble de ventas estimadas que los títulos exclusivos de Windows (un incremento cercano al 115%) y obtienen un ratio de reseñas positivas ligeramente mayor (aprox. 9% de mejora relativa). Esto indica que la disponibilidad en varias plataformas amplía significativamente el alcance comercial y mejora modestamente la percepción del jugador.\
+\textbf{5.-} **Conclusion 5 del trabajo de investigación:** Los
+resultados muestran que los juegos multiplataforma presentan un
+desempeño claramente superior. En promedio, alcanzan más del doble de
+ventas estimadas que los títulos exclusivos de Windows (un incremento
+cercano al 115%) y obtienen un ratio de reseñas positivas ligeramente
+mayor (aprox. 9% de mejora relativa). Esto indica que la disponibilidad
+en varias plataformas amplía significativamente el alcance comercial y
+mejora modestamente la percepción del jugador.\
 
-\textbf{Recomendación} Se recomienda prorizar el desarrollo multiplataforma, ya que esta estrategia se asocia con un aumento sustancial en ventas y una mejor recepción del público. Expandir el soporte más allá de Windows permite acceder a nuevos segmentos de mercado y fortalecer la valoración del producto, lo que puede traducirse en un mayor rendimiento comercial.\
+\textbf{Recomendación} Se recomienda prorizar el desarrollo
+multiplataforma, ya que esta estrategia se asocia con un aumento
+sustancial en ventas y una mejor recepción del público. Expandir el
+soporte más allá de Windows permite acceder a nuevos segmentos de
+mercado y fortalecer la valoración del producto, lo que puede traducirse
+en un mayor rendimiento comercial.\
 
-\textbf{6.-} **Conclusion 6 del trabajo de investigación:** El análisis muestra que las combinaciones de género y categoría con mayor potencial son aquellas que presentan simultáneamente baja saturación y alta valoración por parte de los usuarios. Entre las mejores oportunidades destacan Software Training – AA, Animation & Modeling – AAA y Web Publishing – AA, segmentos donde la competencia es limitada y la recepción del público es consistentemente positiva. Estos resultados indican que existen nichos específicos dentro del mercado que ofrecen condiciones favorables para el desarrollo de nuevos productos.\
+\textbf{6.-} **Conclusion 6 del trabajo de investigación:** El análisis
+muestra que las combinaciones de género y categoría con mayor potencial
+son aquellas que presentan simultáneamente baja saturación y alta
+valoración por parte de los usuarios. Entre las mejores oportunidades
+destacan Software Training – AA, Animation & Modeling – AAA y Web
+Publishing – AA, segmentos donde la competencia es limitada y la
+recepción del público es consistentemente positiva. Estos resultados
+indican que existen nichos específicos dentro del mercado que ofrecen
+condiciones favorables para el desarrollo de nuevos productos.\
 
-\textbf{Recomendación} Se recomienda priorizar el desarrollo en combinaciones de género y categoría que obtuvieron un índice de oportunidad elevado, ya que representan nichos poco competidos con alta aceptación del usuario. En particular, los segmentos liderados por géneros como Software Training, Animation & Modeling y Web Publishing ofrecen un entorno estratégico para maximizar diferenciación, visibilidad y probabilidad de éxito comercial. Apostar por estos nichos permite a las empresas posicionarse en mercados con menor presión competitiva y mayor potencial de crecimiento.
+\textbf{Recomendación} Se recomienda priorizar el desarrollo en
+combinaciones de género y categoría que obtuvieron un índice de
+oportunidad elevado, ya que representan nichos poco competidos con alta
+aceptación del usuario. En particular, los segmentos liderados por
+géneros como Software Training, Animation & Modeling y Web Publishing
+ofrecen un entorno estratégico para maximizar diferenciación,
+visibilidad y probabilidad de éxito comercial. Apostar por estos nichos
+permite a las empresas posicionarse en mercados con menor presión
+competitiva y mayor potencial de crecimiento.
 
 \appendix
 \renewcommand{\thechapter}{\Alph{chapter}}

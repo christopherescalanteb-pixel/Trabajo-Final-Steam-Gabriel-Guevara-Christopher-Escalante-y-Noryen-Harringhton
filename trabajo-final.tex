@@ -263,57 +263,158 @@ usuarios
 
 \subsection{Horizontal}
 
-Describir la cobertura Horizontal del trabajo de investigación\\
+La cobertura horizontal abarca las características intrínsecas de cada
+videojuego registrado en la base de datos de Steam. Se consideran las
+siguientes variables:
 
 \begin{table}[ht]
 \centering
-\caption{Variables consideradas} 
-\resizebox{10cm}{!} {
-\begin{tabular}{ccc}
-  \hline
-\ \ \ \ \ NOMBRE DE LA VARIABLE \\ 
-  \hline
-   VARIABLE 1 \\ 
-VARIABLE 2\\ 
-VARIABLE n\\ 
-   \hline
-\end{tabular}
+\caption{Variables consideradas en el estudio}
+\resizebox{12cm}{!}{%
+\begin{tabular}{cll}
+\hline
+\textbf{TIPO} & \textbf{VARIABLE} & \textbf{DESCRIPCIÓN} \\
+\hline
+Categórica & name & Nombre comercial del videojuego \\
+Categórica & developer & Desarrollador del juego \\
+Categórica & publisher & Publicador/Editor \\
+Numérica & price & Precio en USD \\
+Categórica & genres & Género del juego (Action, RPG, Strategy, etc.) \\
+Numérica & positive\_ratings & Número de reseñas positivas \\
+Numérica & negative\_ratings & Número de reseñas negativas \\
+Numérica & average\_playtime & Tiempo promedio de juego (minutos) \\
+Numérica & median\_playtime & Tiempo mediano de juego (minutos) \\
+Categórica & owners & Rango estimado de propietarios \\
+Categórica & platforms & Plataformas disponibles (Windows, Mac, Linux) \\
+Categórica & steamspy\_tags & Etiquetas de comunidad (Indie, FPS, etc.) \\
+\hline
+\end{tabular}%
 }
 \end{table}
 
 \subsection{Vertical}
 
-Describir la cobertura Vertical del trabajo de investigación
+La cobertura vertical del trabajo de investigación comprende un total de
+27,000+ observaciones (registros). Cada fila representa un videojuego
+único disponible en Steam. El alcance temporal de los datos abarca desde
+el año 1998 hasta el año 2019, lo que permite un análisis de series de
+tiempo de largo plazo.
 
 \section{Periodo de Referencia}
 
-Describir la fuente y el Periodo de Referencia utilizado en el trabajo
-de investigación
+\begin{verbatim}
+## [1] "1997-06-30"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "2019-05-01"
+\end{verbatim}
+
+El periodo de referencia del estudio abarca desde el 30 de junio de 1997
+hasta el 1 de mayo de 2019, correspondiente al rango temporal completo
+disponible en el dataset de Steam utilizado para el análisis.
 
 \section{Variables}
 
-Describir la variable en estudio en el trabajo de investigación
+\subsection{Variables Dependientes (Éxito del Videojuego)}
+
+El éxito del videojuego se mide a través de tres dimensiones:
+
+\begin{enumerate}
+  \item \textbf{Valoración:} Ratio de reseñas positivas:
+  $$\text{ratio\_positivo} = \frac{\text{positive\_ratings}}{\text{positive\_ratings} + \text{negative\_ratings}}$$
+  
+  \item \textbf{Retención:} Tiempo promedio de juego (\texttt{average\_playtime}) en minutos.
+  
+  \item \textbf{Alcance:} Base de jugadores estimada a partir de \texttt{owners}. Se extrajeron tres variables derivadas:
+  \begin{itemize}
+    \item \texttt{owners\_min}: Límite inferior del rango.
+    \item \texttt{owners\_max}: Límite superior del rango.
+    \item \texttt{owners\_avg}: Promedio del rango.
+    \item \texttt{owners\_group}: Categoría derivada (Menos de 1M, 1M-5M, 5M-10M, 10M-20M, 20M+).
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Variables Independientes (Explicativas)}
+
+\begin{enumerate}
+  \item \textbf{Escala de producción:} Clasificación en tres categorías:
+  \begin{itemize}
+    \item \textbf{Indie:} Juegos con la etiqueta "Indie" en \texttt{steamspy\_tags}.
+    \item \textbf{AAA:} Juegos desarrollados por grandes publicadores (Valve, Ubisoft, EA, Activision, Bethesda, Rockstar, Capcom, Square Enix, SEGA, 2K, Bandai Namco).
+    \item \textbf{AA:} El resto de los juegos.
+  \end{itemize}
+  
+  \item \textbf{Modelo de negocio:}
+  \begin{itemize}
+    \item \textbf{Free to Play (F2P):} Juegos con precio igual a \$0 USD.
+    \item \textbf{Premium:} Juegos con precio mayor a \$0 USD.
+  \end{itemize}
+  
+  \item \textbf{Atributos del producto:}
+  \begin{itemize}
+    \item \textbf{Precio:} Variable numérica (\texttt{price}) en USD.
+    \item \textbf{Género:} Variable categórica (\texttt{genres}). Se extrajo el género principal (\texttt{genre\_main}) como el primer valor.
+    \item \textbf{Soporte multiplataforma:} Variable binaria que indica si el juego está disponible en más de una plataforma (Windows, Mac, Linux).
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Variables Derivadas para Segmentación}
+
+\begin{itemize}
+  \item \texttt{price\_bin}: Rangos de precio (0-5, 5-10, 10-20, 20-40, 40-60, 60-100, 100-500 USD).
+  \item \texttt{Índice de Oportunidad}: 
+  $$\text{Índice de Oportunidad} = \frac{\text{Ratio Promedio de Valoración}}{\ln(\text{Número de Juegos} + 1)}$$
+\end{itemize}
 
 \chapter{Marco Teórico}
 
 \section{Bases Teóricas}
 
-Resumen de las bases teoricas explicadas en el capitulo y su
-importancia\\
+\subsection{Análisis Exploratorio de Datos (EDA)}
 
-\subsection{Definición 1}
+Formalizado por John Tukey, el EDA resume características principales de
+un conjunto de datos mediante métodos visuales. Para una variable
+aleatoria continua \(X\), se definen:
 
-Descripción de la definición 1\\
+\begin{itemize}
+  \item Media muestral: $\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$
+  \item Varianza: $S^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^{2}$
+\end{itemize}
 
-\subsection{Definición 2}
+\subsection{Correlación de Pearson}
 
-Descripción de la definición 2\\
+Mide la relación lineal entre dos variables:
 
-\subsection{Definición n}
+\[\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}\]
 
-Descripción de la definición n\\
+\subsection{Variables Categóricas}
 
-\chapter{Marco Metódico}
+Se codifican mediante variables \textit{dummy} o \textit{one-hot} para
+su uso en modelos.
+
+\section{Clasificación por Escala de Producción}
+
+\begin{itemize}
+  \item \textbf{Indie:} Equipos pequeños (1-15 personas), presupuesto \$50k-\$500k, auto-publicados.
+  \item \textbf{AA:} Estudios medianos (20-100 personas), presupuesto \$1M-\$10M.
+  \item \textbf{AAA:} Grandes estudios (100+ personas), presupuesto \$50M-\$200M+.
+\end{itemize}
+
+\section{Modelo Free to Play vs Premium}
+
+Los F2P eliminan la barrera de precio y generan ingresos mediante
+microtransacciones. Títulos como \textit{Dota 2} y \textit{CS:GO}
+demuestran que este modelo puede lograr altísima retención.
+
+\section{Índice de Oportunidad}
+
+\[\text{Índice de Oportunidad} = \frac{\text{Ratio Promedio de Valoración}}{\ln(\text{Número de Juegos} + 1)}\]
+
+Penaliza la saturación y premia la alta valoración, identificando nichos
+con potencial.
+
+\chapter{Marco Metodologico}
 
 En esta sección se presentan las metodologías y/o test necesarios
 relacionados con la práctica divulgada en el marco teórico, así como las
@@ -321,7 +422,26 @@ fuentes de datos.
 
 \section{Bases metódicas utilizadas en el trabajo de investigación}
 
-Desarrollo\\
+El estudio se fundamentó en un enfoque cuantitativo y descriptivo,
+utilizando técnicas de análisis exploratorio de datos (EDA) para
+identificar patrones, distribuciones y relaciones entre las variables
+del dataset de Steam. Se aplicaron métodos de limpieza y transformación
+y de datos mediante el uso de R y el ecosistema tidyverse.\\
+
+Se emplearon medidas estadísticas como medias, medianas, proporciones y
+correlaciones para caracterizar el comportamiento de las variables
+clave. Asimismo, se utilizaron visualizaciones como boxplots, gráficos
+de dispersión, gráficos de barras y series temporales para facilitar la
+interpretación de los resultados.\\
+
+Para la identificación de nichos de mercado se construyó un Índice de
+Oportunidad, basado en la relación entre valoración promedio y
+saturación del género, permitiendo comparar segmentos de forma mas
+objetiva.\\
+
+Todo el procesamiento, análisis y generación de gráficos se realizó
+mediante un flujo reproducible en RMarkdown, garantizando transparencia,
+trazabilidad y replicabilidad del estudio.
 
 \subsection{Procesamiento y Limpieza de Datos}
 
@@ -365,9 +485,12 @@ El proceso de Extracción, Transformación y Carga (ETL) consistió en:
 ## [1] "Registros válidos: 27075 | Variables: 27"
 \end{verbatim}
 
-\subsection{Item 2}
+\section{Pruebas y Visualización}
 
-Descripción\\
+Se utilizaron boxplots, gráficos de dispersión, gráficos de barras y el
+Índice de Oportunidad. Las herramientas fueron R, RStudio y los paquetes
+\texttt{tidyverse}, \texttt{knitr}, \texttt{kableExtra},
+\texttt{scales}, \texttt{lubridate}, \texttt{patchwork}.
 
 \subsubsection{Item 2.2}
 
@@ -386,7 +509,7 @@ desventajas al aplicar dichos tests.\}
 
 \subsection{¿Logran los juegos con la etiqueta "Indie" superar en ratio de reseñas positivas a los juegos de grandes publicadores (AAA) a pesar de tener menor volumen de propietarios?}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-1-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
 Los juegos Indie muestran una mayor variabilidad en su ratio de reseñas
 positivas, con valores que van desde muy bajos hasta muy altos.
@@ -400,7 +523,7 @@ AAA.
 
 \subsection{¿Cómo se compara la retención real (tiempo de juego) de los gigantes Free to Play frente a los títulos Premium más exitosos? ¿El modelo gratuito genera ecosistemas donde solo sobreviven los juegos como servicio?}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-2-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-3-1} \end{center}
 
 Los juegos Free to Play (F2P) muestran una retención mucho más alta a
 medida que crecen en popularidad, mientras que los Premium también
@@ -412,7 +535,7 @@ patrón distinto.
 
 \subsection{¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-3-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 El precio no determina la valoración.\\
 Los juegos baratos, medianos y caros tienen medianas muy parecidas. No
@@ -421,14 +544,14 @@ que los juegos de mayor precio reciban mejores reseñas.
 
 \subsection{¿Cuáles son los juegos con mayor número de propietarios estimados? ¿Se traduce un alto número de descargas en altos promedios de tiempo de juego?}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 El gráfico muestra una alta concentración de popularidad: pocos títulos
 acumulan la mayoría de propietarios. Esto describe el tamaño del
 mercado, pero no permite inferir compromiso ni tiempo de juego. Es un
 gráfico contextual, no explicativo.
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 La mediana del tiempo de juego es similar en casi todos los grupos
 (200--350 min). Esto indica que el comportamiento típico del jugador no
@@ -438,7 +561,7 @@ no a una tendencia general.
 
 \subsection{Evaluar cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial y las valoraciones de los usuarios}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-7-1} \end{center}
 
 Los resultados muestran que los juegos multiplataforma presentan un
 promedio de 210.840 propietarios, mientras que los juegos exclusivos de
@@ -449,7 +572,7 @@ Windows.
 
 \subsection{Desde una óptica de desarrollo de producto, ¿qué combinación de Género y Categoría presenta la menor saturación en el mercado pero la mayor tasa de reseñas positivas?}
 
-\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-7-1} \end{center}
+\begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 El gráfico muestra que en las primeras posiciones ---como Software
 Training -- AA, Animation \& Modeling -- AAA y Web Publishing -- AA---
