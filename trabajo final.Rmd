@@ -26,7 +26,11 @@ output:
     toc: true
     df_print: paged
 abstract: |
-  resumen
+  Este trabajo analiza los factores determinantes del éxito de los videojuegos en Steam, la principal plataforma de distribución digital para PC. A partir de un dataset con más de 27,000 juegos, se examinan métricas como valoraciones de usuarios, tiempo de juego, precio, propietarios estimados, género y soporte multiplataforma.\
+  
+  Utilizando técnicas de análisis exploratorio de datos y visualización estadística en R, se comparan juegos Indie, AA y AAA, así como modelos Premium frente a Free to Play. El estudio responde a seis preguntas de investigación sobre competitividad entre escalas de producción, retención de jugadores, relación precio-valoración, vínculo entre popularidad y tiempo de juego, impacto del soporte multiplataforma e identificación de nichos rentables.\
+  
+  Los hallazgos buscan ofrecer inteligencia de mercado para desarrolladores y guías de consumo para jugadores, contribuyendo a la toma de decisiones basada en datos.
 editor_options: 
   markdown: 
     wrap: 72
@@ -35,9 +39,9 @@ editor_options:
 ```{r setup, include=FALSE}
 # Configuración global de chunks
 knitr::opts_chunk$set(
-  echo = FALSE,        # Mostrar código
-  warning = FALSE,    # Ocultar advertencias
-  message = FALSE,    # Ocultar mensajes de carga
+  echo = FALSE,     
+  warning = FALSE,   
+  message = FALSE,    
   fig.align = "center",
   out.width = "90%",
   fig.pos = "H",
@@ -52,14 +56,14 @@ library(scales)
 library(lubridate)
 library(patchwork)
 
-# Cargar datos (¡AJUSTA LA RUTA!)
+# Cargar datos
 steam_data <- read_csv("2. Steam.csv")
 
 # Limpieza
 options(scipen = 999)
 steam_data <- steam_data %>%
   mutate(
-    # Conversión de owners a numérico (mínimo, máximo y promedio)
+    # Conversión de owners a numérico 
     owners_min = as.numeric(sub("-.*", "", owners)),
     owners_max = as.numeric(sub(".*-", "", owners)),
     owners_avg = (owners_min + owners_max) / 2,
@@ -82,7 +86,7 @@ steam_data <- steam_data %>%
       owners_avg < 1e7 ~ "5M - 10M",
       owners_avg < 2e7 ~ "10M - 20M",
       TRUE ~ "20M+"),
-    # Género principal (primer género antes del punto y coma)
+    # Género principal 
     genre_main = sub(";.*", "", genres))
 ```
 
@@ -270,7 +274,7 @@ plazo.
 
 \section{Periodo de Referencia}
 
-```{r}
+```{r, include=FALSE}
 min(steam_data$release_date, na.rm = TRUE)
 max(steam_data$release_date, na.rm = TRUE)
 ```
@@ -386,9 +390,9 @@ Para la identificación de nichos de mercado se construyó un Índice de Oportun
 
 Todo el procesamiento, análisis y generación de gráficos se realizó mediante un flujo reproducible en RMarkdown, garantizando transparencia, trazabilidad y replicabilidad del estudio.
 
-\subsection{Procesamiento y Limpieza de Datos}
+\subsection{Limpieza de Datos}
 
-El proceso de Extracción, Transformación y Carga (ETL) consistió en:
+la limpieza de los datos y agregacion de columnas se baso en lo siguiente:
 
 1.  cargar datos desde el archivo 2.Steam.csv.
 
@@ -397,64 +401,49 @@ El proceso de Extracción, Transformación y Carga (ETL) consistió en:
 
 3.  Clasificación: Creación de variables derivadas:
 
--   Conversión de propietarios: extracción del mínimo, máximo y promedio
-    a partir del rango de propietarios reportado por Steam (owners_min,
-    owners_max, owners_avg).
+-   Conversión de propietarios: extracción del mínimo, máximo y promedio a partir del rango de propietarios reportado por Steam (owners_min,owners_max, owners_avg).
 
--   ratio_positivo: proporción de reseñas positivas sobre el total de
-    reseñas.
+-   ratio_positivo: proporción de reseñas positivas sobre el total de reseñas.
 
--   modelo_negocio: clasificación en “Free to Play” (si price == 0) o
-    “Premium” (si price \> 0).
+-   modelo_negocio: clasificación en “Free to Play” (si price == 0) o “Premium” (si price \> 0).
 
--   tipo_juego: clasificación en “Indie”, “AAA” o “AA” según etiquetas y
-    desarrolladores reconocidos.
+-   tipo_juego: clasificación en “Indie”, “AAA” o “AA” según etiquetas y desarrolladores reconocidos.
 
--   multiplataforma: identificación de juegos disponibles en más de una
-    plataforma.
+-   multiplataforma: identificación de juegos disponibles en más de una plataforma.
 
--   owners_group: agrupación de juegos según su número estimado de
-    propietarios (Menos de 1M, 1M–5M, 5M–10M, 10M–20M, 20M+), utilizada
-    para comparar patrones entre segmentos de distinta popularidad.
+-   owners_group: agrupación de juegos según su número estimado de propietarios (Menos de 1M, 1M–5M, 5M–10M, 10M–20M, 20M+), utilizada para comparar patrones entre segmentos de distinta popularidad.
 
 ```{r etl-process, echo=FALSE, message=FALSE, warning=FALSE}
-# Verificación de dimensiones post-limpieza
-dim_desc <- paste("Registros válidos:", nrow(steam_data), 
+Datos_de_data <- paste("Registros válidos:", nrow(steam_data), 
                   "| Variables:", ncol(steam_data))
-print(dim_desc)
 ```
 
 \section{Pruebas y Visualización}
 
 Se utilizaron boxplots, gráficos de dispersión, gráficos de barras y el Índice de Oportunidad. Las herramientas fueron R, RStudio y los paquetes \texttt{tidyverse}, \texttt{knitr}, \texttt{kableExtra}, \texttt{scales}, \texttt{lubridate}, \texttt{patchwork}.
 
-\subsubsection{Item 2.2}
-
-Descripción\
-
-\subsection{Item n}
-
-Descripción\
-
 \chapter{Análisis de Resultados}
 
-{\small Este capítulo presenta los resultados obtenidos al aplicar las
-metodologías descritas en el capítulo anterior, así como del análisis
-estadístico descriptivo de las variables estudiadas y las ventajas y
-desventajas al aplicar dichos tests.}
+A continuacion se presentaran los resultados obtenidos al aplicar las metodologías descritas en el capítulo anterior, así como del análisis estadístico descriptivo de las variables estudiadas y las ventajas y desventajas al aplicar dichos tests.
 
 \subsection{¿Logran los juegos con la etiqueta "Indie" superar en ratio de reseñas positivas a los juegos de grandes publicadores (AAA) a pesar de tener menor volumen de propietarios?}
+
 
 ```{r}
 steam_data %>%
   filter(tipo_juego %in% c("Indie", "AAA")) %>%
   ggplot(aes(x = tipo_juego, y = ratio_positivo, fill = tipo_juego)) +
-  geom_boxplot(alpha = 0.7) +
-  labs(x = "Tipo de juego", y = "Ratio de reseñas positivas",
-       title = "¿Los Indie superan a los AAA en valoración?") +
+  geom_violin(trim = FALSE, alpha = 0.7) +
+  geom_boxplot(width = 0.12, aes(fill = tipo_juego), outlier.shape = NA) +
+  labs(
+    x = "Tipo de juego",
+    y = "Ratio de reseñas positivas",
+    fill = "tipo de juego",
+    title = "¿Los Indie superan a los AAA en valoración?"
+  ) +
   theme_minimal() +
-  scale_fill_manual(values = c("Indie" = "#E69F00", "AAA" = "#56B4E9")) +
-  scale_y_continuous(labels = percent)
+  scale_fill_manual(values = c("Indie" = "#13AD05", "AAA" = "#C01A01")) +
+  scale_y_continuous(labels = scales::percent)
 
 ```
 
@@ -484,7 +473,7 @@ steam_data %>%
        title = "Relación entre popularidad y retención",
        color = "Modelo de negocio") +
   theme_minimal(base_size = 12) +
-  scale_color_manual(values = c("Free to Play" = "purple", "Premium" = "green")) +
+  scale_color_manual(values = c("Free to Play" = "#B40000", "Premium" = "#1BEF08")) +
   coord_cartesian(ylim = c(0, 800))
 ```
 
@@ -496,7 +485,7 @@ retención, típicos de juegos como servicio, pero no son los únicos: los
 Premium más exitosos también logran retención elevada, aunque con un
 patrón distinto.
 
-\subsection{¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?}
+\subsection{¿el precio de un juego determina su valoración, o los usuarios son más críticos con los juegos más caros?}
 
 ```{r}
 steam_data %>%
@@ -553,7 +542,7 @@ mercado, pero no permite inferir compromiso ni tiempo de juego. Es un
 gráfico contextual, no explicativo.
 
 ```{r}
- medianas <- steam_data %>%
+medianas <- steam_data %>%
   group_by(owners_group) %>%
   summarise(mediana = median(median_playtime, na.rm = TRUE))
 
@@ -567,8 +556,6 @@ ggplot(medianas, aes(x = owners_group, y = mediana, fill = owners_group)) +
   ) +
   theme_minimal() +
   theme(legend.position = "none")
-
-
 ```
 
 La mediana del tiempo de juego es similar en casi todos los grupos
@@ -682,7 +669,7 @@ se preserva la creatividad que caracteriza al sector independiente.\
 \textbf{2.-} **Conclusion 2 del trabajo de investigación:** Los juegos
 Free to Play (F2P) muestran una retención mucho más alta a medida que
 crecen en popularidad, mientras que los Premium también retienen más
-cuando son exitosos, pero con una pendiente más suave./
+cuando son exitosos, pero con una pendiente más suave.\
 
 Esto sugiere que los gigantes F2P sí generan ecosistemas de altísima
 retención, típicos de juegos como servicio, pero no son los únicos: los
@@ -781,9 +768,3 @@ competitiva y mayor potencial de crecimiento.
 
 \appendix
 \renewcommand{\thechapter}{\Alph{chapter}}
-
-\chapter{Anexo A}
-
-\chapter{Anexo B}
-
-\chapter{Anexo C}

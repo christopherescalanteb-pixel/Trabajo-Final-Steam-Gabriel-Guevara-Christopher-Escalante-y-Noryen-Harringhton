@@ -97,7 +97,24 @@ Estadistica y Ciencias Actuariales}
   \chapter*{Resumen}     % Crea el título "Resumen" sin numeración (Capítulo *)
   \addcontentsline{toc}{chapter}{Resumen} % (Opcional) Lo añade al índice
   
-  resumen             % Aquí se pega el texto que escribiste en el YAML
+  Este trabajo analiza los factores determinantes del éxito de los
+videojuegos en Steam, la principal plataforma de distribución digital
+para PC. A partir de un dataset con más de 27,000 juegos, se examinan
+métricas como valoraciones de usuarios, tiempo de juego, precio,
+propietarios estimados, género y soporte multiplataforma.\\
+
+Utilizando técnicas de análisis exploratorio de datos y visualización
+estadística en R, se comparan juegos Indie, AA y AAA, así como modelos
+Premium frente a Free to Play. El estudio responde a seis preguntas de
+investigación sobre competitividad entre escalas de producción,
+retención de jugadores, relación precio-valoración, vínculo entre
+popularidad y tiempo de juego, impacto del soporte multiplataforma e
+identificación de nichos rentables.\\
+
+Los hallazgos buscan ofrecer inteligencia de mercado para
+desarrolladores y guías de consumo para jugadores, contribuyendo a la
+toma de decisiones basada en
+datos.             % Aquí se pega el texto que escribiste en el YAML
   
   \cleardoublepage
 
@@ -302,14 +319,6 @@ tiempo de largo plazo.
 
 \section{Periodo de Referencia}
 
-\begin{verbatim}
-## [1] "1997-06-30"
-\end{verbatim}
-
-\begin{verbatim}
-## [1] "2019-05-01"
-\end{verbatim}
-
 El periodo de referencia del estudio abarca desde el 30 de junio de 1997
 hasta el 1 de mayo de 2019, correspondiente al rango temporal completo
 disponible en el dataset de Steam utilizado para el análisis.
@@ -443,9 +452,10 @@ Todo el procesamiento, análisis y generación de gráficos se realizó
 mediante un flujo reproducible en RMarkdown, garantizando transparencia,
 trazabilidad y replicabilidad del estudio.
 
-\subsection{Procesamiento y Limpieza de Datos}
+\subsection{Limpieza de Datos}
 
-El proceso de Extracción, Transformación y Carga (ETL) consistió en:
+la limpieza de los datos y agregacion de columnas se baso en lo
+siguiente:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -461,8 +471,8 @@ El proceso de Extracción, Transformación y Carga (ETL) consistió en:
 \begin{itemize}
 \item
   Conversión de propietarios: extracción del mínimo, máximo y promedio a
-  partir del rango de propietarios reportado por Steam (owners\_min,
-  owners\_max, owners\_avg).
+  partir del rango de propietarios reportado por Steam
+  (owners\_min,owners\_max, owners\_avg).
 \item
   ratio\_positivo: proporción de reseñas positivas sobre el total de
   reseñas.
@@ -481,10 +491,6 @@ El proceso de Extracción, Transformación y Carga (ETL) consistió en:
   para comparar patrones entre segmentos de distinta popularidad.
 \end{itemize}
 
-\begin{verbatim}
-## [1] "Registros válidos: 27075 | Variables: 27"
-\end{verbatim}
-
 \section{Pruebas y Visualización}
 
 Se utilizaron boxplots, gráficos de dispersión, gráficos de barras y el
@@ -492,20 +498,12 @@ Se utilizaron boxplots, gráficos de dispersión, gráficos de barras y el
 \texttt{tidyverse}, \texttt{knitr}, \texttt{kableExtra},
 \texttt{scales}, \texttt{lubridate}, \texttt{patchwork}.
 
-\subsubsection{Item 2.2}
-
-Descripción\\
-
-\subsection{Item n}
-
-Descripción\\
-
 \chapter{Análisis de Resultados}
 
-\{\small Este capítulo presenta los resultados obtenidos al aplicar las
+A continuacion se presentaran los resultados obtenidos al aplicar las
 metodologías descritas en el capítulo anterior, así como del análisis
 estadístico descriptivo de las variables estudiadas y las ventajas y
-desventajas al aplicar dichos tests.\}
+desventajas al aplicar dichos tests.
 
 \subsection{¿Logran los juegos con la etiqueta "Indie" superar en ratio de reseñas positivas a los juegos de grandes publicadores (AAA) a pesar de tener menor volumen de propietarios?}
 
@@ -533,7 +531,7 @@ retención, típicos de juegos como servicio, pero no son los únicos: los
 Premium más exitosos también logran retención elevada, aunque con un
 patrón distinto.
 
-\subsection{¿Existe una correlación directa entre el precio de un juego y su valoración, o los usuarios son más críticos con los juegos más caros?}
+\subsection{¿el precio de un juego determina su valoración, o los usuarios son más críticos con los juegos más caros?}
 
 \begin{center}\includegraphics[width=0.9\linewidth,]{trabajo-final_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
@@ -603,7 +601,7 @@ independiente.\\
 \textbf{2.-} \textbf{Conclusion 2 del trabajo de investigación:} Los
 juegos Free to Play (F2P) muestran una retención mucho más alta a medida
 que crecen en popularidad, mientras que los Premium también retienen más
-cuando son exitosos, pero con una pendiente más suave./
+cuando son exitosos, pero con una pendiente más suave.\\
 
 Esto sugiere que los gigantes F2P sí generan ecosistemas de altísima
 retención, típicos de juegos como servicio, pero no son los únicos: los
@@ -703,12 +701,6 @@ competitiva y mayor potencial de crecimiento.
 
 \appendix
 \renewcommand{\thechapter}{\Alph{chapter}}
-
-\chapter{Anexo A}
-
-\chapter{Anexo B}
-
-\chapter{Anexo C}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                   REFERENCIAS                     %
