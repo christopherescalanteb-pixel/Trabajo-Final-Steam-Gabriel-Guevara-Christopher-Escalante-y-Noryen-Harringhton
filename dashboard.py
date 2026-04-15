@@ -546,3 +546,108 @@ with tab4:
             **Interpretación:**
             Existe una correlación positiva clara: a mayor número de propietarios, mayor es el tiempo mediano de juego. Esto valida que los juegos con comunidades masivas logran ciclos de vida más largos y mayor compromiso.
             """)
+
+with tab5:
+    st.header("Impacto del Soporte Multiplataforma en el Rendimiento")
+
+    agrupacion = df_filtrado.groupby('multiplataforma').agg(
+        owners_avg_mean=('owners_avg', 'mean'),
+        ratio_pos_mean=('ratio_positivo', 'mean')
+    ).reset_index()
+
+    if not agrupacion.empty:
+        colores_t5 = {'Multiplataforma': '#4CAF50', 'Solo Windows': '#E53935'}
+        fig5 = make_subplots(rows=1, cols=2, subplot_titles=("Ventas estimadas", "Críticas positivas"))
+
+        for plataforma in agrupacion['multiplataforma']:
+            df_sub = agrupacion[agrupacion['multiplataforma'] == plataforma]
+            
+            fig5.add_trace(
+                go.Bar(
+                    x=df_sub['multiplataforma'],
+                    y=df_sub['owners_avg_mean'],
+                    text=df_sub['owners_avg_mean'],
+                    texttemplate='%{text:,.0f}',
+                    textposition='outside',
+                    marker_color=colores_t5[plataforma],
+                    showlegend=False
+                ),
+                row=1, col=1
+            )
+            
+            fig5.add_trace(
+                go.Bar(
+                    x=df_sub['multiplataforma'],
+                    y=df_sub['ratio_pos_mean'],
+                    text=df_sub['ratio_pos_mean'],
+                    texttemplate='%{text:.1%}',
+                    textposition='outside',
+                    marker_color=colores_t5[plataforma],
+                    showlegend=False
+                ),
+                row=1, col=2
+            )
+
+        fig5.update_layout(**layout_estandar)
+        fig5.update_yaxes(title_text="Promedio de propietarios", showgrid=True, gridcolor="#333333", row=1, col=1)
+        fig5.update_yaxes(title_text="Ratio de reseñas", tickformat=".0%", showgrid=True, gridcolor="#333333", row=1, col=2)
+        
+        st.plotly_chart(fig5, use_container_width=True)
+
+        try:
+            val_ventas_multi = agrupacion.loc[agrupacion['multiplataforma'] == 'Multiplataforma', 'owners_avg_mean'].values[0]
+            val_ventas_win = agrupacion.loc[agrupacion['multiplataforma'] == 'Solo Windows', 'owners_avg_mean'].values[0]
+            incremento_ventas = (val_ventas_multi - val_ventas_win) / val_ventas_win
+            
+            st.markdown(f"""
+            *Interpretación:*
+            Los resultados demuestran que los títulos multiplataforma superan significativamente a los exclusivos de Windows en ambas métricas. 
+            Específicamente, presentan un incremento del *{incremento_ventas:.1%}* en el promedio de propietarios estimados y una mayor aceptación crítica, 
+            lo que sugiere que la accesibilidad técnica es un factor determinante para el alcance masivo y la satisfacción del usuario.
+            """)
+        except IndexError:
+            st.info("Filtre ambos estados de plataforma para visualizar la comparativa de incremento.") 
+
+
+with tab6:
+    st.header("Identificación de Nichos de Oportunidad")
+
+    # Agrupación de datos
+    combo = df_filtrado.groupby(['genre_main', 'tipo_juego']).agg(
+        n_juegos=('tipo_juego', 'count'),
+        ratio_prom=('ratio_positivo', 'mean')
+    ).reset_index()
+
+    # Cálculo del Índice de Oportunidad
+    combo['indice_oportunidad'] = combo['ratio_prom'] / np.log(combo['n_juegos'] + 1)
+    
+    # CORRECCIÓN: Convertimos a string antes de concatenar para evitar el TypeError
+    combo['combo_label'] = combo['genre_main'].astype(str) + " - " + combo['tipo_juego'].astype(str)
+    
+    combo_top15 = combo.nlargest(15, 'indice_oportunidad').sort_values(by='indice_oportunidad', ascending=True)
+
+    if not combo_top15.empty:
+        fig6 = px.bar(
+            combo_top15,
+            x="indice_oportunidad",
+            y="combo_label",
+            color="tipo_juego",
+            orientation='h',
+            color_discrete_map={"Indie": "#4CAF50", "AAA": "#E53935", "AA": "#F1F106"}
+        )
+
+        fig6.update_layout(
+            **layout_estandar,
+            xaxis_title="Índice de oportunidad",
+            yaxis_title="Combinación Género - Categoría",
+            legend_title_text="Categoría",
+            height=700
+        )
+        
+        st.plotly_chart(fig6, use_container_width=True)
+
+        st.markdown("""
+        *Interpretación:*
+        El Índice de Oportunidad destaca segmentos donde existe una alta satisfacción del usuario con una competencia relativamente baja. 
+        Las primeras posiciones representan nichos con alto potencial estratégico, ya que la demanda no está saturada por una oferta excesiva de títulos.
+        """)           
