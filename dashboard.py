@@ -2,24 +2,17 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# 1. Configuración de la página
 st.set_page_config(page_title="Análisis de Datos de Steam", layout="wide")
 
-# 2. Título principal con imagen relacionada
-#st.image("http://googleusercontent.com/image_collection/image_retrieval/681894429186253607_0", use_container_width=True)
 st.title("🕹️ Análisis de Juegos de Steam: ¿Cuáles son los mejores juegos?")
 st.write("Gabriel Guevara, Christopher Escalante y Noryen Harringhton") 
 st.markdown("---")
 
-#3. Carga de datos
 @st.cache_data
 def load_data():
      return pd.read_csv('steam_cleaned_full.csv') 
 df = pd.read_csv('steam_cleaned_full.csv')
 df['production_scale'] = pd.Categorical(df['production_scale'], categories=['Indie', 'AAA/AA'], ordered=True)
-
-
-# 4. Creación de las 8 pestañas
 
 nombres_pestañas = [
     "📊 Distribución de Positividad", 
@@ -35,12 +28,10 @@ nombres_pestañas = [
 
 tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8,= st.tabs(nombres_pestañas)
 
-# 4. Organización del contenido por pestaña
 
 with tab1:
     st.subheader("📊 Distribución de Positividad")
     
-    # Gráfico 1: Violín estático
     fig1 = px.violin(df, x='production_scale', y='positivity_ratio', color='production_scale',
                      box=True, points=False, template="plotly_dark",
                      color_discrete_map={'Indie': '#00CC96', 'AAA/AA': '#EF553B'},
@@ -49,10 +40,8 @@ with tab1:
     
     fig1.update_layout(title_font_size=20, margin=dict(t=60, b=40, l=40, r=40))
     
-    # Mostrar gráfico
     st.plotly_chart(fig1, use_container_width=True)
     
-    # Descripción técnica
     with st.expander("Ver detalles del gráfico"):
         st.markdown("""
         **GRÁFICO 1: Distribución de Positividad (Violín Estático)**
@@ -64,10 +53,8 @@ with tab1:
 with tab2:
     st.subheader(nombres_pestañas[1])
     
-   # Procesamiento para Gráfico 2
     users_scale = df.groupby('production_scale', as_index=False)['owners_numeric'].sum()
     
-    # Gráfico 2: Barras
     fig2 = px.bar(users_scale, x='production_scale', y='owners_numeric', color='production_scale',
                   template="plotly_dark", text_auto='.2s',
                   color_discrete_map={'Indie': '#00CC96', 'AAA/AA': '#EF553B'},
@@ -77,10 +64,10 @@ with tab2:
     fig2.update_traces(textposition='outside', textfont_size=14)
     fig2.update_layout(title_font_size=20, showlegend=False)
     
-    # Mostrar gráfico
+
     st.plotly_chart(fig2, use_container_width=True)
     
-    # Descripción técnica
+
     with st.expander("Ver detalles del gráfico"):
         st.markdown("""
         **GRÁFICO 2: Usuarios Totales Acumulados (Barras)**
@@ -111,21 +98,16 @@ with tab3:
 
 with tab4:
     st.subheader(nombres_pestañas[3])
-   # 1. Filtro y extracción de datos
-    # Filtramos juegos con tiempo de juego y extraemos el género principal
+
     df_played = df[df['median_playtime_hours'] > 0].copy()
     df_played['primary_genre'] = df_played['genres'].apply(
         lambda x: str(x).replace(',', ';').split(';')[0].strip()
     )
 
-    # Agrupación por mediana de tiempo
     all_genres = df_played.groupby('primary_genre', as_index=False).agg(
         median_playtime=('median_playtime_hours', 'median')
     ).sort_values('median_playtime', ascending=False)
 
-    # 2. Creación del Gráfico con el degradado personalizado
-    # Usamos [rojo, verde] si quieres que lo más alto sea verde, 
-    # o [verde, rojo] si sigues el orden literal de tu petición.
     custom_gradient = ['#EF553B', '#00CC96'] 
 
     fig5 = px.bar(
@@ -140,20 +122,17 @@ with tab4:
         labels={'primary_genre': 'Género Principal', 'median_playtime': 'Horas Medianas'}
     )
 
-    # 3. Ajustes de diseño
     fig5.update_traces(textposition='outside')
     fig5.update_layout(
         title_font_size=20, 
         xaxis_tickangle=-90, 
         coloraxis_showscale=False, 
         height=700,
-        margin=dict(t=80, b=150) # Margen extra abajo para las etiquetas rotadas
+        margin=dict(t=80, b=150)
     )
 
-    # Mostrar en Streamlit
     st.plotly_chart(fig5, use_container_width=True)
 
-    # Descripción técnica
     with st.expander("Ver detalles del gráfico"):
         st.markdown("""
         **GRÁFICO 5: Retención por Géneros (Barras)**
