@@ -60,7 +60,7 @@ Identificar y analizar los patrones de éxito de los videojuegos en Steam desde 
 
 -   **Análisis Descriptivo de Accesibilidad:** Describir cómo el soporte a múltiples plataformas (Windows, Mac, Linux) y la disponibilidad de idiomas afectan el tamaño del mercado potencial de un juego.
 
--  **Analisis de la visibilidad y las ventas de un VJ dado el periodo de lanzamiento** Analizar la visibilidad y las ventas de los videojuegos agrupando sus fechas de lanzamiento por periodos (cuatrimestres/trimestres) para identificar patrones estacionales favorables.
+-   **Analisis de la visibilidad y las ventas de un VJ dado el periodo de lanzamiento** Analizar la visibilidad y las ventas de los videojuegos agrupando sus fechas de lanzamiento por periodos (cuatrimestres/trimestres) para identificar patrones estacionales favorables.
 
 ## 3. Preguntas de Investigación
 
